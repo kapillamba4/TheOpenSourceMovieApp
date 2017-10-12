@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        id="@+id/tab_tv"
+        icon="@drawable/ic_tv"
+        title="Tv shows" />
+    <tab
+        id="@+id/tab_movie"
+        icon="@drawable/ic_movie"
+        title="Movies" />
+    <tab
+        id="@+id/tab_favorites"
+        icon="@drawable/ic_favorite"
+        title="Favorites" />
+</tabs>
