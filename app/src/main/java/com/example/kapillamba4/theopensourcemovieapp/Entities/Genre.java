@@ -5,5 +5,6 @@ package com.example.kapillamba4.theopensourcemovieapp.Entities;
  */
 
 public class Genre {
-    // TODO
+    private int id;
+    private String name;
 }

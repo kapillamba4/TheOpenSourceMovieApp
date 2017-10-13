@@ -6,16 +6,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
 
 import com.example.kapillamba4.theopensourcemovieapp.Adapters.TvCustomAdapter;
+import com.example.kapillamba4.theopensourcemovieapp.Entities.PopularTV;
 import com.example.kapillamba4.theopensourcemovieapp.Entities.TvShow;
+import com.example.kapillamba4.theopensourcemovieapp.Services.TvService;
+import com.example.kapillamba4.theopensourcemovieapp.Utils.CONSTANTS;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
 import java.util.ArrayList;
 
+import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -44,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
+        TvService tvService = retrofit.create(TvService.class);
+        Call<ArrayList<PopularTV> > popularTvShows = tvService.getTvShows(CONSTANTS.API_KEY);
         mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes int tabId) {

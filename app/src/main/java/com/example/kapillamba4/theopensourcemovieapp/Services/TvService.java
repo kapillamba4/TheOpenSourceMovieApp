@@ -1,13 +1,11 @@
 package com.example.kapillamba4.theopensourcemovieapp.Services;
 
-import com.example.kapillamba4.theopensourcemovieapp.Entities.TvShow;
-import com.example.kapillamba4.theopensourcemovieapp.Utils.CONSTANTS;
+import com.example.kapillamba4.theopensourcemovieapp.Entities.PopularTV;
 
 import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 /**
@@ -15,6 +13,6 @@ import retrofit2.http.Path;
  */
 
 public interface TvService {
-    @GET("/tv/popular?api_key=")
-    Call<ArrayList<TvShow> > getTvShows();
+    @GET("/tv/popular?api_key={api_key}")
+    Call<ArrayList<PopularTV> > getTvShows(@Path("api_key") String key);
 }
