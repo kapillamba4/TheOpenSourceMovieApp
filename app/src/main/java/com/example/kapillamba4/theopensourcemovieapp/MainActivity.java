@@ -1,70 +1,43 @@
 package com.example.kapillamba4.theopensourcemovieapp;
 
-import android.support.annotation.IdRes;
-import android.support.v4.widget.NestedScrollView;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 
-import com.example.kapillamba4.theopensourcemovieapp.Adapters.TvCustomAdapter;
-import com.example.kapillamba4.theopensourcemovieapp.Entities.PopularTV;
-import com.example.kapillamba4.theopensourcemovieapp.Entities.TvShow;
-import com.example.kapillamba4.theopensourcemovieapp.Services.TvService;
-import com.example.kapillamba4.theopensourcemovieapp.Utils.CONSTANTS;
-import com.roughike.bottombar.BottomBar;
-import com.roughike.bottombar.OnTabSelectListener;
-
-import java.util.ArrayList;
-
-import retrofit2.Call;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import com.example.kapillamba4.theopensourcemovieapp.Fragments.MovieFragment;
+import com.example.kapillamba4.theopensourcemovieapp.Fragments.TvFragment;
 
 public class MainActivity extends AppCompatActivity {
 
-    private BottomBar mBottomBar;
-    private NestedScrollView mScrollView;
-    private RecyclerView mRecyclerView;
-    private TvCustomAdapter mAdapter;
-    private ArrayList<TvShow> mTvShows;
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem tab) {
+            switch (tab.getItemId()) {
+                case R.id.menu_movies:
+                    MovieFragment movieFragment = new MovieFragment();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, movieFragment).commit();
+                    break;
+                case R.id.menu_tv_shows:
+                    TvFragment tvFragment = new TvFragment();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, tvFragment).commit();
+                    break;
+                case R.id.menu_personal_favourites:
+                    // TODO
+                    break;
+            }
+            return false;
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycle_view);
-        mRecyclerView.setLayoutManager(horizontalLayoutManager);
-        mAdapter = new TvCustomAdapter(this, mTvShows);
-
-        mScrollView = (NestedScrollView) findViewById(R.id.scroll_view);
-        mBottomBar = (BottomBar) findViewById(R.id.bottom_bar);
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.themoviedb.org/3/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        TvService tvService = retrofit.create(TvService.class);
-        Call<ArrayList<PopularTV> > popularTvShows = tvService.getTvShows(CONSTANTS.API_KEY);
-        mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
-            @Override
-            public void onTabSelected(@IdRes int tabId) {
-                switch (tabId) {
-                    case R.id.menu_movies:
-                        // TODO
-                        break;
-                    case R.id.menu_personal_favourites:
-//                        LayoutInflater inflater = (LayoutInflater) getSystemService(MainActivity.this.LAYOUT_INFLATER_SERVICE);
-//                        View view = inflater.inflate(R.layout.tv, null);
-//                        mScrollView.addView(view);
-                        break;
-                    case R.id.menu_tv_shows:
-                        // TODO
-                        break;
-                }
-            }
-        });
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 }

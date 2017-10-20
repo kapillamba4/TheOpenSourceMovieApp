@@ -1,19 +1,15 @@
 package com.example.kapillamba4.theopensourcemovieapp.Adapters;
 
 import android.content.Context;
-import android.media.tv.TvView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.kapillamba4.theopensourcemovieapp.Entities.TvShow;
-import com.example.kapillamba4.theopensourcemovieapp.MainActivity;
 import com.example.kapillamba4.theopensourcemovieapp.R;
 import com.squareup.picasso.Picasso;
 
@@ -34,16 +30,16 @@ public class TvCustomAdapter extends RecyclerView.Adapter<TvCustomAdapter.TvView
 
     @Override
     public TvViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View inflatedView = LayoutInflater.from(mContext).inflate(R.layout.entity, parent, false);
+        View inflatedView = LayoutInflater.from(mContext).inflate(R.layout.tv_card_layout, parent, false);
         return new TvViewHolder(inflatedView);
     }
 
     @Override
     public void onBindViewHolder(TvViewHolder holder, int position) {
-        TvShow tvItem = mTvShow.get(position);
-        Picasso.with(mContext).load(tvItem.getThumbnail()).into(holder.mImageView);
-        holder.mTitle.setText(tvItem.getTitle());
-        holder.mRelease.setText(tvItem.getReleaseDate());
+        TvShow mtvItem = mTvShow.get(position);
+        holder.mTitle.setText(mtvItem.getOriginalName());
+        holder.mRating.setText(String.valueOf(mtvItem.getVoteAverage()));
+        Picasso.with(mContext).load("https://image.tmdb.org/t/p/w500" + mtvItem.getBackdropPath()).into(holder.mImageView);
     }
 
     @Override
@@ -54,22 +50,21 @@ public class TvCustomAdapter extends RecyclerView.Adapter<TvCustomAdapter.TvView
     static class TvViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView mImageView;
         TextView mTitle;
-        RatingBar mRatingBar;
-        TextView mRelease;
+        TextView mRating;
         View itemView;
 
         public TvViewHolder(View itemView) {
             super(itemView);
             this.itemView = itemView;
-            this.mImageView = itemView.findViewById(R.id.thumbnail);
-            this.mTitle = itemView.findViewById(R.id.display_name);
-            this.mRelease = itemView.findViewById(R.id.release_date);
-            this.mRatingBar = itemView.findViewById(R.id.rating_bar);
+            this.mImageView = itemView.findViewById(R.id.tv_card_thumbnail);
+            this.mTitle = itemView.findViewById(R.id.tv_card_name);
+            this.mRating = itemView.findViewById(R.id.tv_card_rating);
         }
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(view.getContext(), "CLick", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(view.getContext(), "CLick", Toast.LENGTH_SHORT).show();
+            Log.i("Movie Item Click", "true");
         }
     }
 }
