@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                                            xmlns:app="http://schemas.android.com/apk/res-auto"
+                                            xmlns:tools="http://schemas.android.com/tools"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                                            tools:context="com.example.kapillamba4.theopensourcemovieapp.MovieDetailActivity"
+                                            tools:showIn="@layout/activity_movie_detail">
+
+    <LinearLayout
+            android:id="@+id/layout_movie_detail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        <TextView
+                android:id="@+id/layout_movie_overview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Overview"/>
+
+        <TextView
+                android:id="@+id/layout_movie_release"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Release: "/>
+
+        <LinearLayout
+                android:id="@+id/layout_movie_keywords"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <!-- Dynamically inflate here -->
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.example.kapillamba4.theopensourcemovieapp.Entities.Movie;
 import com.example.kapillamba4.theopensourcemovieapp.R;
 import com.squareup.picasso.Picasso;
@@ -19,12 +18,11 @@ import java.util.ArrayList;
  * Created by kapil on 17/10/17.
  */
 
-public class MovieCustomAdapter extends RecyclerView.Adapter<MovieCustomAdapter.MovieViewHolder> {
-
+public class HorizontalMovieCustomAdapter extends RecyclerView.Adapter<HorizontalMovieCustomAdapter.MovieViewHolder> {
     private ArrayList<Movie> mMovies;
     private Context mContext;
 
-    public MovieCustomAdapter(Context context, ArrayList<Movie> movies) {
+    public HorizontalMovieCustomAdapter(Context context, ArrayList<Movie> movies) {
         mContext = context;
         mMovies = movies;
     }
@@ -36,11 +34,11 @@ public class MovieCustomAdapter extends RecyclerView.Adapter<MovieCustomAdapter.
     }
 
     @Override
-    public void onBindViewHolder(MovieCustomAdapter.MovieViewHolder holder, int position) {
+    public void onBindViewHolder(HorizontalMovieCustomAdapter.MovieViewHolder holder, int position) {
         Movie mMovie = mMovies.get(position);
         holder.mTitle.setText(mMovie.getTitle());
         holder.mRating.setText(String.valueOf(mMovie.getVoteAverage()));
-        Picasso.with(mContext).load("https://image.tmdb.org/t/p/w500" + mMovie.getBackdropPath()).centerCrop().into(holder.mImageView);
+        Picasso.with(mContext).load("https://image.tmdb.org/t/p/w500" + mMovie.getPosterPath()).into(holder.mImageView);
     }
 
     @Override
