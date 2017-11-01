@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.kapillamba4.theopensourcemovieapp.Entities.Movie;
 import com.example.kapillamba4.theopensourcemovieapp.R;
 import com.squareup.picasso.Picasso;
@@ -38,7 +40,7 @@ public class HorizontalMovieCustomAdapter extends RecyclerView.Adapter<Horizonta
         Movie mMovie = mMovies.get(position);
         holder.mTitle.setText(mMovie.getTitle());
         holder.mRating.setText(String.valueOf(mMovie.getVoteAverage()));
-        Picasso.with(mContext).load("https://image.tmdb.org/t/p/w500" + mMovie.getPosterPath()).into(holder.mImageView);
+        Picasso.with(mContext).load("https://image.tmdb.org/t/p/w185" + mMovie.getPosterPath()).into(holder.mImageView);
     }
 
     @Override

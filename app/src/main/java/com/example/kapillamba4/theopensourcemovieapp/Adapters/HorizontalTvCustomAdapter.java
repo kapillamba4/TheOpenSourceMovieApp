@@ -38,7 +38,7 @@ public class HorizontalTvCustomAdapter extends RecyclerView.Adapter<HorizontalTv
         TvShow mtvItem = mTvShow.get(position);
         holder.mTitle.setText(mtvItem.getName());
         holder.mRating.setText(String.valueOf(mtvItem.getVoteAverage()));
-        Picasso.with(mContext).load("https://image.tmdb.org/t/p/w500" + mtvItem.getPosterPath()).into(holder.mImageView);
+        Picasso.with(mContext).load("https://image.tmdb.org/t/p/w185" + mtvItem.getPosterPath()).into(holder.mImageView);
     }
 
     @Override

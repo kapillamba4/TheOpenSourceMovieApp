@@ -18,4 +18,5 @@
         android:icon="@drawable/ic_favorite"
         android:title="Personal"
         app:showAsAction="always" />
+
 </menu>

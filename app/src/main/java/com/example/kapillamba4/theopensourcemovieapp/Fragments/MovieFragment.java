@@ -9,10 +9,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SnapHelper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
+
 import com.example.kapillamba4.theopensourcemovieapp.Adapters.HorizontalMovieCustomAdapter;
 import com.example.kapillamba4.theopensourcemovieapp.Entities.Movie;
 import com.example.kapillamba4.theopensourcemovieapp.Entities.PopularMovie;
@@ -34,6 +38,7 @@ public class MovieFragment extends Fragment {
     ArrayList<Movie> mTopRatedMovies = new ArrayList<>();
     ArrayList<Movie> mUpcomingMovies = new ArrayList<>();
     Retrofit mBuilder;
+    private boolean loading  = false;
 
     public MovieFragment() {
         // Required empty public constructor
@@ -61,7 +66,7 @@ public class MovieFragment extends Fragment {
                 mProgressBar.setVisibility(View.GONE);
                 mNestedScrollView.setVisibility(View.VISIBLE);
                 mPopularMovies = new ArrayList<>(response.body().getResults());
-                HorizontalMovieCustomAdapter mHorizontalMovieCustomAdapter = new HorizontalMovieCustomAdapter(getContext(), mPopularMovies);
+                final HorizontalMovieCustomAdapter mHorizontalMovieCustomAdapter = new HorizontalMovieCustomAdapter(getContext(), mPopularMovies);
                 mHorizontalMovieCustomAdapter.notifyDataSetChanged();
                 mRecyclerView.setAdapter(mHorizontalMovieCustomAdapter);
             }
@@ -121,9 +126,48 @@ public class MovieFragment extends Fragment {
                 mProgressBar.setVisibility(View.GONE);
                 mNestedScrollView.setVisibility(View.VISIBLE);
                 mUpcomingMovies = new ArrayList<>(response.body().getResults());
-                HorizontalMovieCustomAdapter mHorizontalMovieCustomAdapter = new HorizontalMovieCustomAdapter(getContext(), mUpcomingMovies);
+                final HorizontalMovieCustomAdapter mHorizontalMovieCustomAdapter = new HorizontalMovieCustomAdapter(getContext(), mUpcomingMovies);
                 mHorizontalMovieCustomAdapter.notifyDataSetChanged();
                 mRecyclerView.setAdapter(mHorizontalMovieCustomAdapter);
+                mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                    @Override
+                    public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                        super.onScrollStateChanged(recyclerView, newState);
+                    }
+
+                    @Override
+                    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                        super.onScrolled(recyclerView, dx, dy);
+                        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+                        //Toast.makeText(getContext(), "Hello", Toast.LENGTH_SHORT).show();
+                        int visibleItemCount = 0, totalItemCount = 0, pastVisiblesItems = 0;
+                        if (dx > 0 && !loading) {
+                            visibleItemCount = recyclerView.getLayoutManager().getChildCount();
+                            totalItemCount = recyclerView.getLayoutManager().getItemCount();
+                            pastVisiblesItems = ((LinearLayoutManager)recyclerView.getLayoutManager()).findFirstVisibleItemPosition();
+                            if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+                                loading = true;
+                                Log.v("Scroll: ", "Last Item reached !");
+                                MovieService movieService = mBuilder.create(MovieService.class);
+                                Call<PopularMovie> popularMovieCall = movieService.getUpcomingMovies(CONSTANTS.API_KEY, 2, "IN");
+                                popularMovieCall.enqueue(new Callback<PopularMovie>() {
+                                    @Override
+                                    public void onResponse(Call<PopularMovie> call, Response<PopularMovie> response) {
+                                        mUpcomingMovies.addAll(response.body().getResults());
+                                        mHorizontalMovieCustomAdapter.notifyDataSetChanged();
+                                        loading = false;
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<PopularMovie> call, Throwable t) {
+
+                                    }
+                                });
+                                //Do pagination.. i.e. fetch new data
+                            }
+                        }
+                    }
+                });
             }
 
             @Override
@@ -148,34 +192,8 @@ public class MovieFragment extends Fragment {
         setupPopularMovies(view);
         setupTopRatedMovies(view);
         setupUpcomingMovies(view);
-//        mRecyclerView = view.findViewById(R.id.movie_popular_recycler_view);
-//        LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-//        horizontalLayoutManager.canScrollHorizontally();
-//        mRecyclerView.setLayoutManager(horizontalLayoutManager);
-//        // TODO add infinte scrolling
-//
-//        mSnapHelper = new LinearSnapHelper();
-//        mSnapHelper.attachToRecyclerView(mRecyclerView);
-//
-//        MovieService movieService = mBuilder.create(MovieService.class);
-//        Call<PopularMovie> popularMovieCall = movieService.getPopularMovies(CONSTANTS.API_KEY, 1, "IN");
-//        popularMovieCall.enqueue(new Callback<PopularMovie>() {
-//            @Override
-//            public void onResponse(Call<PopularMovie> call, Response<PopularMovie> response) {
-//                mProgressBar.setVisibility(View.GONE);
-//                mNestedScrollView.setVisibility(View.VISIBLE);
-//                mMovies = new ArrayList<>(response.body().getResults());
-//                mHorizontalMovieCustomAdapter = new HorizontalMovieCustomAdapter(getContext(), mMovies);
-//                mHorizontalMovieCustomAdapter.notifyDataSetChanged();
-//                mRecyclerView.setAdapter(mHorizontalMovieCustomAdapter);
-//            }
-//
-//            @Override
-//            public void onFailure(Call<PopularMovie> call, Throwable t) {
-//                t.printStackTrace();
-//            }
-//        });
 
         return view;
     }
+
 }
