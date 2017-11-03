@@ -14,7 +14,7 @@
     <View
         android:id="@+id/black_mask"
         android:visibility="gone"
-        android:background="#66000000"
+        android:background="@color/blackMask"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
@@ -41,78 +41,89 @@
                 card_view:cardUseCompatPadding="true">
 
                 <LinearLayout
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/title"
-                        tools:text="Title"
+                        style="@style/HeaderStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:ellipsize="end"
-                        android:textSize="@dimen/text_large"
+                        android:gravity="center_vertical"
                         android:maxLines="2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical" />
+                        android:textSize="@dimen/text_large"
+                        tools:text="Title" />
 
                     <TextView
+                        android:id="@+id/status"
+                        style="@style/CustomStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_action_calendar_month"
+                        android:drawablePadding="@dimen/default_padding_small"
+                        android:minHeight="@dimen/default_height_medium"
+                        android:text="release status" />
+
+                    <TextView
+                        android:id="@+id/release_date"
+                        style="@style/CustomStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/ic_date_range"
-                        android:drawablePadding="16dp"
-                        android:id="@+id/year"
-                        tools:text="ABCD"
-                        style="@style/CustomStyle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:minHeight="48dp"/>
+                        android:drawablePadding="@dimen/default_padding_small"
+                        android:minHeight="@dimen/default_height_medium"
+                        android:text="  date" />
 
                     <TextView
-                        android:drawableLeft="@drawable/ic_language"
-                        android:drawablePadding="16dp"
-                        android:id="@+id/companies"
-                        tools:text="Company 1, Company 2, Company 3, Company 4, Company 5"
+                        android:id="@+id/genre"
                         style="@style/CustomStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:minHeight="48dp"/>
+                        android:drawableLeft="@drawable/ic_language"
+                        android:drawablePadding="@dimen/default_padding_small"
+                        android:minHeight="@dimen/default_height_medium"
+                        android:text="  genre 1, genre 2, genre 3" />
 
                     <LinearLayout
-                        android:orientation="vertical"
                         android:id="@+id/tagline_container"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
                         <TextView
-                            android:text="tagline"
-                            style="@style/CustomStyle"
+                            style="@style/HeaderStyle"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:text="Tagline" />
 
                         <TextView
                             android:id="@+id/tagline"
-                            tools:text="set tagline here."
+                            style="@style/CustomStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            style="@style/CustomStyle"/>
+                            android:text="set tagline here." />
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/overview_container"
-                        android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
                         <TextView
-                            android:text="overview"
                             style="@style/HeaderStyle"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:text="overview" />
 
                         <TextView
                             android:id="@+id/overview"
+                            style="@style/CustomStyle"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            style="@style/CustomStyle"/>
+                            android:layout_height="wrap_content" />
 
                     </LinearLayout>
                 </LinearLayout>

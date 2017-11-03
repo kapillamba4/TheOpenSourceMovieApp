@@ -18,4 +18,6 @@
     <dimen name="default_padding_small">8dp</dimen>
     <dimen name="text_large">28sp</dimen>
     <dimen name="text_medium">14sp</dimen>
+
+    <dimen name="default_height_medium">48dp</dimen>
 </resources>

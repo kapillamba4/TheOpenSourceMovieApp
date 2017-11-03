@@ -2,6 +2,7 @@ package com.example.kapillamba4.theopensourcemovieapp;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
@@ -16,14 +17,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.kapillamba4.theopensourcemovieapp.Adapters.HorizontalMovieCustomAdapter;
+import com.example.kapillamba4.theopensourcemovieapp.Adapters.HorizontalTvCustomAdapter;
 import com.example.kapillamba4.theopensourcemovieapp.Adapters.SearchDataAdapter;
 import com.example.kapillamba4.theopensourcemovieapp.Fragments.MovieFragment;
 import com.example.kapillamba4.theopensourcemovieapp.Fragments.TvFragment;
 import com.example.kapillamba4.theopensourcemovieapp.Network.NetworkChangeReceiver;
 
+import java.time.Instant;
 
-public class MainActivity extends AppCompatActivity {
+
+public class MainActivity extends AppCompatActivity implements HorizontalMovieCustomAdapter.onClickCustomListener, HorizontalTvCustomAdapter.onClickCustomListener {
 
     private static TextView mCheckConnection;
     private NetworkChangeReceiver mNetworkChangeReceiver;
@@ -106,5 +112,26 @@ public class MainActivity extends AppCompatActivity {
     public void onDestroy() {
         super.onDestroy();
         unregisterNetworkChanges();
+    }
+
+    @Override
+    public void onItemClick(String id, String type) {
+        Intent intent;
+        switch (type) {
+            case "tv":
+                intent = new Intent(this, MovieDetailActivity.class);
+                intent.putExtra("id", id);
+                intent.putExtra("type", type);
+                startActivity(intent);
+                Toast.makeText(this, "TV "+id, Toast.LENGTH_SHORT);
+                break;
+            case "movie":
+                intent = new Intent(this, MovieDetailActivity.class);
+                intent.putExtra("id", id);
+                intent.putExtra("type", type);
+                startActivity(intent);
+                break;
+        }
+
     }
 }

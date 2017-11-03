@@ -31,7 +31,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.util.ArrayList;
 
-public class MovieFragment extends Fragment {
+public class MovieFragment extends Fragment  {
     NestedScrollView mNestedScrollView;
     ProgressBar mProgressBar;
     ArrayList<Movie> mPopularMovies = new ArrayList<>();
@@ -195,5 +195,4 @@ public class MovieFragment extends Fragment {
 
         return view;
     }
-
 }

@@ -21,16 +21,31 @@ import java.util.ArrayList;
 public class HorizontalTvCustomAdapter extends RecyclerView.Adapter<HorizontalTvCustomAdapter.TvViewHolder> {
     private ArrayList<TvShow> mTvShow;
     private Context mContext;
+    private onClickCustomListener mOnItemClickListener;
 
     public HorizontalTvCustomAdapter(Context context, ArrayList<TvShow> tvShows) {
         mContext = context;
         mTvShow = tvShows;
+        try {
+            mOnItemClickListener = (onClickCustomListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement OnItemClickedListener");
+        }
     }
 
     @Override
     public TvViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View inflatedView = LayoutInflater.from(mContext).inflate(R.layout.tv_card_layout, parent, false);
-        return new TvViewHolder(inflatedView);
+        final TvViewHolder tvViewHolder = new TvViewHolder(inflatedView);
+        tvViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(tvViewHolder.id != null && tvViewHolder.id != "") {
+                    mOnItemClickListener.onItemClick(tvViewHolder.id, "tv");
+                }
+            }
+        });
+        return tvViewHolder;
     }
 
     @Override
@@ -38,6 +53,7 @@ public class HorizontalTvCustomAdapter extends RecyclerView.Adapter<HorizontalTv
         TvShow mtvItem = mTvShow.get(position);
         holder.mTitle.setText(mtvItem.getName());
         holder.mRating.setText(String.valueOf(mtvItem.getVoteAverage()));
+        holder.id = String.valueOf(mtvItem.getId());
         Picasso.with(mContext).load("https://image.tmdb.org/t/p/w185" + mtvItem.getPosterPath()).into(holder.mImageView);
     }
 
@@ -50,11 +66,13 @@ public class HorizontalTvCustomAdapter extends RecyclerView.Adapter<HorizontalTv
         ImageView mImageView;
         TextView mTitle;
         TextView mRating;
+        String id;
         View mItemView;
 
         public TvViewHolder(View itemView) {
             super(itemView);
             mItemView = itemView;
+            id = "";
             mImageView = itemView.findViewById(R.id.tv_card_thumbnail);
             mTitle = itemView.findViewById(R.id.tv_card_name);
             mRating = itemView.findViewById(R.id.tv_card_rating);
@@ -64,5 +82,13 @@ public class HorizontalTvCustomAdapter extends RecyclerView.Adapter<HorizontalTv
         public void onClick(View view) {
             Log.i("Tv Item Click", "true");
         }
+    }
+
+    public void setClickListener(onClickCustomListener callback) {
+        mOnItemClickListener = callback;
+    }
+
+    public interface onClickCustomListener {
+        void onItemClick(String id, String type);
     }
 }

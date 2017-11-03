@@ -26,7 +26,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.util.ArrayList;
 
-public class TvFragment extends Fragment implements View.OnClickListener {
+public class TvFragment extends Fragment {
     ProgressBar mProgressBar;
     NestedScrollView mNestedScrollView;
     ArrayList<TvShow> mPopularTvShows = new ArrayList<>();
@@ -42,7 +42,6 @@ public class TvFragment extends Fragment implements View.OnClickListener {
         final RecyclerView mRecyclerView = view.findViewById(R.id.tv_popular_recycler_view);
         LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         mRecyclerView.setLayoutManager(horizontalLayoutManager);
-        mRecyclerView.setOnClickListener(this);
         SnapHelper mSnapHelper = new LinearSnapHelper();
         mSnapHelper.attachToRecyclerView(mRecyclerView);
         TvService tvService = mBuilder.create(TvService.class);
@@ -135,10 +134,5 @@ public class TvFragment extends Fragment implements View.OnClickListener {
         setupUpcomingTvShows(view);
 
         return view;
-    }
-
-    @Override
-    public void onClick(View view) {
-
     }
 }

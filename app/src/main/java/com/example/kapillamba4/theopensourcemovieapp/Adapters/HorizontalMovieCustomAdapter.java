@@ -23,16 +23,32 @@ import java.util.ArrayList;
 public class HorizontalMovieCustomAdapter extends RecyclerView.Adapter<HorizontalMovieCustomAdapter.MovieViewHolder> {
     private ArrayList<Movie> mMovies;
     private Context mContext;
+    private onClickCustomListener mOnItemClickListener;
 
     public HorizontalMovieCustomAdapter(Context context, ArrayList<Movie> movies) {
         mContext = context;
         mMovies = movies;
+        try {
+            mOnItemClickListener = (onClickCustomListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement OnItemClickedListener");
+        }
     }
 
     @Override
     public MovieViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View inflatedView = LayoutInflater.from(mContext).inflate(R.layout.movie_card_layout, parent, false);
-        return new MovieViewHolder(inflatedView);
+        final MovieViewHolder movieViewHolder = new MovieViewHolder(inflatedView);
+        movieViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(movieViewHolder.id != null && movieViewHolder.id != "") {
+                    mOnItemClickListener.onItemClick(movieViewHolder.id, "movie");
+                }
+            }
+        });
+
+        return movieViewHolder;
     }
 
     @Override
@@ -40,6 +56,7 @@ public class HorizontalMovieCustomAdapter extends RecyclerView.Adapter<Horizonta
         Movie mMovie = mMovies.get(position);
         holder.mTitle.setText(mMovie.getTitle());
         holder.mRating.setText(String.valueOf(mMovie.getVoteAverage()));
+        holder.id = String.valueOf(mMovie.getId());
         Picasso.with(mContext).load("https://image.tmdb.org/t/p/w185" + mMovie.getPosterPath()).into(holder.mImageView);
     }
 
@@ -53,10 +70,12 @@ public class HorizontalMovieCustomAdapter extends RecyclerView.Adapter<Horizonta
         TextView mTitle;
         TextView mRating;
         View mItemView;
+        String id;
 
         public MovieViewHolder(View itemView) {
             super(itemView);
             mItemView = itemView;
+            id = "";
             mImageView = itemView.findViewById(R.id.movie_card_thumbnail);
             mTitle = itemView.findViewById(R.id.movie_card_name);
             mRating = itemView.findViewById(R.id.movie_card_rating);
@@ -66,5 +85,15 @@ public class HorizontalMovieCustomAdapter extends RecyclerView.Adapter<Horizonta
         public void onClick(View view) {
             Log.i("Movie Item Click", "true");
         }
+    }
+
+
+    public void setClickListener(onClickCustomListener callback) {
+        mOnItemClickListener = callback;
+    }
+
+
+    public interface onClickCustomListener {
+        void onItemClick(String id, String type);
     }
 }
