@@ -30,7 +30,7 @@ public class VerticalTvCustomAdapter extends RecyclerView.Adapter<VerticalTvCust
 
     @Override
     public VerticalTvCustomAdapter.TvViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.tv_vertical_list_item, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.tv_card_vertical_list, parent, false);
         return new TvViewHolder(view);
     }
 

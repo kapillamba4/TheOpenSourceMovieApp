@@ -30,7 +30,7 @@ public class VerticalMovieCustomAdapter extends RecyclerView.Adapter<VerticalMov
 
     @Override
     public MovieViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.movie_vertical_list_item, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.movie_card_vertical_list, parent, false);
         return new VerticalMovieCustomAdapter.MovieViewHolder(view);
     }
 

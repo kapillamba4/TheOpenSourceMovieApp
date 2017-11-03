@@ -1,123 +1,123 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context=".Fragments.TvFragment">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.TvFragment">
 
     <android.support.v4.widget.NestedScrollView
-            android:id="@+id/tv_scroll_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone">
+        android:id="@+id/tv_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <FrameLayout
+                android:id="@+id/movie_popular_banner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-            <FrameLayout
-                    android:id="@+id/movie_popular_banner"
-                    android:layout_width="match_parent"
+                android:layout_marginTop="8dp"
+                android:paddingBottom="8dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:paddingBottom="8dp"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
-                    android:paddingTop="8dp">
+                    android:layout_gravity="left"
+                    android:text="Popular Now"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"/>
 
                 <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:text="Popular Now"
-                        android:textColor="@android:color/black"
-                        android:textSize="20sp"/>
-
-                <TextView
-                        android:id="@+id/tv_popular_more"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right|center_vertical"
-                        android:clickable="true"
-                        android:text="More"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="14sp"/>
+                    android:id="@+id/tv_popular_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center_vertical"
+                    android:clickable="true"
+                    android:text="More"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"/>
             </FrameLayout>
 
             <android.support.v7.widget.RecyclerView
-                    android:id="@+id/tv_popular_recycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:nestedScrollingEnabled="false"/>
+                android:id="@+id/tv_popular_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:nestedScrollingEnabled="false"/>
 
             <FrameLayout
-                    android:id="@+id/tv_top_rated_banner"
-                    android:layout_width="match_parent"
+                android:id="@+id/tv_top_rated_banner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:paddingBottom="8dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:paddingBottom="8dp"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
-                    android:paddingTop="8dp">
+                    android:layout_gravity="left"
+                    android:text="Top Rated"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"/>
 
                 <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:text="Top Rated"
-                        android:textColor="@android:color/black"
-                        android:textSize="20sp"/>
-
-                <TextView
-                        android:id="@+id/tv_top_rated_more"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right|center_vertical"
-                        android:clickable="true"
-                        android:text="More"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="14sp"/>
+                    android:id="@+id/tv_top_rated_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center_vertical"
+                    android:clickable="true"
+                    android:text="More"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"/>
             </FrameLayout>
 
             <android.support.v7.widget.RecyclerView
-                    android:id="@+id/tv_top_rated_recycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:nestedScrollingEnabled="false"/>
+                android:id="@+id/tv_top_rated_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:nestedScrollingEnabled="false"/>
 
             <FrameLayout
-                    android:id="@+id/movie_upcoming_banner"
-                    android:layout_width="match_parent"
+                android:id="@+id/movie_upcoming_banner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:paddingBottom="8dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:paddingBottom="8dp"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
-                    android:paddingTop="8dp">
+                    android:layout_gravity="left"
+                    android:text="Upcoming"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"/>
 
                 <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:text="Upcoming"
-                        android:textColor="@android:color/black"
-                        android:textSize="20sp"/>
-
-                <TextView
-                        android:id="@+id/tv_upcoming_more"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right|center_vertical"
-                        android:clickable="true"
-                        android:text="More"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="14sp"/>
+                    android:id="@+id/tv_upcoming_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center_vertical"
+                    android:clickable="true"
+                    android:text="More"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"/>
             </FrameLayout>
 
             <android.support.v7.widget.RecyclerView
-                    android:id="@+id/tv_upcoming_recycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:nestedScrollingEnabled="false"/>
+                android:id="@+id/tv_upcoming_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:nestedScrollingEnabled="false"/>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 

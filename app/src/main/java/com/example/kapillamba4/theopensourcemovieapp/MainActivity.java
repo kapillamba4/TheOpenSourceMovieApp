@@ -1,5 +1,7 @@
 package com.example.kapillamba4.theopensourcemovieapp;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.IntentFilter;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
@@ -12,7 +14,10 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.SearchView;
 import android.widget.TextView;
+
+import com.example.kapillamba4.theopensourcemovieapp.Adapters.SearchDataAdapter;
 import com.example.kapillamba4.theopensourcemovieapp.Fragments.MovieFragment;
 import com.example.kapillamba4.theopensourcemovieapp.Fragments.TvFragment;
 import com.example.kapillamba4.theopensourcemovieapp.Network.NetworkChangeReceiver;
@@ -23,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private static TextView mCheckConnection;
     private NetworkChangeReceiver mNetworkChangeReceiver;
     private BottomNavigationView mBottomNavigationView;
-    private Menu mMenu;
+    private SearchDataAdapter mSearchDataAdapter;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
