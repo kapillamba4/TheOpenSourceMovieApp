@@ -5,6 +5,8 @@ package com.example.kapillamba4.theopensourcemovieapp.Utils;
  */
 
 public class CONSTANTS {
-    public static final String API_KEY = "fc3da5c949224dceaafdcd085ce44cd3";
+    public static final String API_KEY = "YOUR_API_KEY";
     public static final String BASE_URL = "https://api.themoviedb.org/3/";
+    public static final String BASE_POSTER_URL_SMALL = "https://image.tmdb.org/t/p/w185";
+    public static final String BASE_POSTER_URL_LARGE = "https://image.tmdb.org/t/p/w500";
 }

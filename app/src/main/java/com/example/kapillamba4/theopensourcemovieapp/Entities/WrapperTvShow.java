@@ -10,7 +10,7 @@ import java.util.List;
  */
 
 
-public class PopularTv {
+public class WrapperTvShow {
 
     @SerializedName("page")
     @Expose

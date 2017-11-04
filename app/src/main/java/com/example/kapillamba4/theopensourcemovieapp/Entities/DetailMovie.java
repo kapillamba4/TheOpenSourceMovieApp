@@ -9,8 +9,9 @@ import java.util.List;
  * Created by kapil on 26/10/17.
  */
 
-public class DetailMovie {
+// TODO
 
+public class DetailMovie {
     @SerializedName("adult")
     @Expose
     private Boolean adult;

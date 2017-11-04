@@ -1,7 +1,5 @@
 package com.example.kapillamba4.theopensourcemovieapp;
 
-import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
@@ -11,11 +9,9 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,8 +21,6 @@ import com.example.kapillamba4.theopensourcemovieapp.Adapters.SearchDataAdapter;
 import com.example.kapillamba4.theopensourcemovieapp.Fragments.MovieFragment;
 import com.example.kapillamba4.theopensourcemovieapp.Fragments.TvFragment;
 import com.example.kapillamba4.theopensourcemovieapp.Network.NetworkChangeReceiver;
-
-import java.time.Instant;
 
 
 public class MainActivity extends AppCompatActivity implements HorizontalMovieCustomAdapter.onClickCustomListener, HorizontalTvCustomAdapter.onClickCustomListener {
@@ -119,14 +113,14 @@ public class MainActivity extends AppCompatActivity implements HorizontalMovieCu
         Intent intent;
         switch (type) {
             case "tv":
-                intent = new Intent(this, MovieDetailActivity.class);
+                intent = new Intent(this, DetailActivity.class);
                 intent.putExtra("id", id);
                 intent.putExtra("type", type);
                 startActivity(intent);
                 Toast.makeText(this, "TV "+id, Toast.LENGTH_SHORT);
                 break;
             case "movie":
-                intent = new Intent(this, MovieDetailActivity.class);
+                intent = new Intent(this, DetailActivity.class);
                 intent.putExtra("id", id);
                 intent.putExtra("type", type);
                 startActivity(intent);

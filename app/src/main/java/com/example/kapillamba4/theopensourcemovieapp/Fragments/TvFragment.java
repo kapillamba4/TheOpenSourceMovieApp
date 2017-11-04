@@ -12,19 +12,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+
 import com.example.kapillamba4.theopensourcemovieapp.Adapters.HorizontalTvCustomAdapter;
-import com.example.kapillamba4.theopensourcemovieapp.Entities.PopularTv;
 import com.example.kapillamba4.theopensourcemovieapp.Entities.TvShow;
+import com.example.kapillamba4.theopensourcemovieapp.Entities.WrapperTvShow;
 import com.example.kapillamba4.theopensourcemovieapp.R;
 import com.example.kapillamba4.theopensourcemovieapp.Services.TvService;
 import com.example.kapillamba4.theopensourcemovieapp.Utils.CONSTANTS;
+
+import java.util.ArrayList;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
-import java.util.ArrayList;
 
 public class TvFragment extends Fragment {
     ProgressBar mProgressBar;
@@ -45,10 +47,10 @@ public class TvFragment extends Fragment {
         SnapHelper mSnapHelper = new LinearSnapHelper();
         mSnapHelper.attachToRecyclerView(mRecyclerView);
         TvService tvService = mBuilder.create(TvService.class);
-        Call<PopularTv> popularTvCall = tvService.getPopularTVShows(CONSTANTS.API_KEY, 1);
-        popularTvCall.enqueue(new Callback<PopularTv>() {
+        Call<WrapperTvShow> popularTvCall = tvService.getPopularTVShows(CONSTANTS.API_KEY, 1);
+        popularTvCall.enqueue(new Callback<WrapperTvShow>() {
             @Override
-            public void onResponse(Call<PopularTv> call, Response<PopularTv> response) {
+            public void onResponse(Call<WrapperTvShow> call, Response<WrapperTvShow> response) {
                 mProgressBar.setVisibility(View.GONE);
                 mNestedScrollView.setVisibility(View.VISIBLE);
                 mPopularTvShows = new ArrayList<>(response.body().getResults());
@@ -58,7 +60,7 @@ public class TvFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<PopularTv> call, Throwable t) {
+            public void onFailure(Call<WrapperTvShow> call, Throwable t) {
                 t.printStackTrace();
             }
         });
@@ -71,10 +73,10 @@ public class TvFragment extends Fragment {
         SnapHelper mSnapHelper = new LinearSnapHelper();
         mSnapHelper.attachToRecyclerView(mRecyclerView);
         TvService tvService = mBuilder.create(TvService.class);
-        Call<PopularTv> popularTvCall = tvService.getTopRatedTvShows(CONSTANTS.API_KEY, 1);
-        popularTvCall.enqueue(new Callback<PopularTv>() {
+        Call<WrapperTvShow> popularTvCall = tvService.getTopRatedTvShows(CONSTANTS.API_KEY, 1);
+        popularTvCall.enqueue(new Callback<WrapperTvShow>() {
             @Override
-            public void onResponse(Call<PopularTv> call, Response<PopularTv> response) {
+            public void onResponse(Call<WrapperTvShow> call, Response<WrapperTvShow> response) {
                 mProgressBar.setVisibility(View.GONE);
                 mNestedScrollView.setVisibility(View.VISIBLE);
                 mPopularTvShows = new ArrayList<>(response.body().getResults());
@@ -84,7 +86,7 @@ public class TvFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<PopularTv> call, Throwable t) {
+            public void onFailure(Call<WrapperTvShow> call, Throwable t) {
                 t.printStackTrace();
             }
         });
@@ -98,10 +100,10 @@ public class TvFragment extends Fragment {
         SnapHelper mSnapHelper = new LinearSnapHelper();
         mSnapHelper.attachToRecyclerView(mRecyclerView);
         TvService tvService = mBuilder.create(TvService.class);
-        Call<PopularTv> popularTvCall = tvService.getPopularTVShows(CONSTANTS.API_KEY, 1);
-        popularTvCall.enqueue(new Callback<PopularTv>() {
+        Call<WrapperTvShow> popularTvCall = tvService.getPopularTVShows(CONSTANTS.API_KEY, 1);
+        popularTvCall.enqueue(new Callback<WrapperTvShow>() {
             @Override
-            public void onResponse(Call<PopularTv> call, Response<PopularTv> response) {
+            public void onResponse(Call<WrapperTvShow> call, Response<WrapperTvShow> response) {
                 mProgressBar.setVisibility(View.GONE);
                 mNestedScrollView.setVisibility(View.VISIBLE);
                 mUpcomingTvShows = new ArrayList<>(response.body().getResults());
@@ -111,7 +113,7 @@ public class TvFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<PopularTv> call, Throwable t) {
+            public void onFailure(Call<WrapperTvShow> call, Throwable t) {
                 t.printStackTrace();
             }
         });

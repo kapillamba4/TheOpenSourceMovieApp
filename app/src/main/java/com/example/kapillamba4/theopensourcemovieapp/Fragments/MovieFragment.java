@@ -13,23 +13,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.example.kapillamba4.theopensourcemovieapp.Adapters.HorizontalMovieCustomAdapter;
 import com.example.kapillamba4.theopensourcemovieapp.Entities.Movie;
-import com.example.kapillamba4.theopensourcemovieapp.Entities.PopularMovie;
+import com.example.kapillamba4.theopensourcemovieapp.Entities.WrapperPopularMovie;
 import com.example.kapillamba4.theopensourcemovieapp.R;
 import com.example.kapillamba4.theopensourcemovieapp.Services.MovieService;
 import com.example.kapillamba4.theopensourcemovieapp.Utils.CONSTANTS;
+
+import java.util.ArrayList;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
-import java.util.ArrayList;
 
 public class MovieFragment extends Fragment  {
     NestedScrollView mNestedScrollView;
@@ -59,10 +58,10 @@ public class MovieFragment extends Fragment  {
         mSnapHelper.attachToRecyclerView(mRecyclerView);
 
         MovieService movieService = mBuilder.create(MovieService.class);
-        Call<PopularMovie> popularMovieCall = movieService.getPopularMovies(CONSTANTS.API_KEY, 1, "IN");
-        popularMovieCall.enqueue(new Callback<PopularMovie>() {
+        Call<WrapperPopularMovie> popularMovieCall = movieService.getPopularMovies(CONSTANTS.API_KEY, 1, "IN");
+        popularMovieCall.enqueue(new Callback<WrapperPopularMovie>() {
             @Override
-            public void onResponse(Call<PopularMovie> call, Response<PopularMovie> response) {
+            public void onResponse(Call<WrapperPopularMovie> call, Response<WrapperPopularMovie> response) {
                 mProgressBar.setVisibility(View.GONE);
                 mNestedScrollView.setVisibility(View.VISIBLE);
                 mPopularMovies = new ArrayList<>(response.body().getResults());
@@ -72,7 +71,7 @@ public class MovieFragment extends Fragment  {
             }
 
             @Override
-            public void onFailure(Call<PopularMovie> call, Throwable t) {
+            public void onFailure(Call<WrapperPopularMovie> call, Throwable t) {
                 t.printStackTrace();
             }
         });
@@ -89,10 +88,10 @@ public class MovieFragment extends Fragment  {
         mSnapHelper.attachToRecyclerView(mRecyclerView);
 
         MovieService movieService = mBuilder.create(MovieService.class);
-        Call<PopularMovie> popularMovieCall = movieService.getTopRatedMovies(CONSTANTS.API_KEY, 1, "IN");
-        popularMovieCall.enqueue(new Callback<PopularMovie>() {
+        Call<WrapperPopularMovie> popularMovieCall = movieService.getTopRatedMovies(CONSTANTS.API_KEY, 1, "IN");
+        popularMovieCall.enqueue(new Callback<WrapperPopularMovie>() {
             @Override
-            public void onResponse(Call<PopularMovie> call, Response<PopularMovie> response) {
+            public void onResponse(Call<WrapperPopularMovie> call, Response<WrapperPopularMovie> response) {
                 mProgressBar.setVisibility(View.GONE);
                 mNestedScrollView.setVisibility(View.VISIBLE);
                 mTopRatedMovies = new ArrayList<>(response.body().getResults());
@@ -102,7 +101,7 @@ public class MovieFragment extends Fragment  {
             }
 
             @Override
-            public void onFailure(Call<PopularMovie> call, Throwable t) {
+            public void onFailure(Call<WrapperPopularMovie> call, Throwable t) {
                 t.printStackTrace();
             }
         });
@@ -119,10 +118,10 @@ public class MovieFragment extends Fragment  {
         mSnapHelper.attachToRecyclerView(mRecyclerView);
 
         MovieService movieService = mBuilder.create(MovieService.class);
-        Call<PopularMovie> popularMovieCall = movieService.getUpcomingMovies(CONSTANTS.API_KEY, 1, "IN");
-        popularMovieCall.enqueue(new Callback<PopularMovie>() {
+        Call<WrapperPopularMovie> popularMovieCall = movieService.getUpcomingMovies(CONSTANTS.API_KEY, 1, "IN");
+        popularMovieCall.enqueue(new Callback<WrapperPopularMovie>() {
             @Override
-            public void onResponse(Call<PopularMovie> call, Response<PopularMovie> response) {
+            public void onResponse(Call<WrapperPopularMovie> call, Response<WrapperPopularMovie> response) {
                 mProgressBar.setVisibility(View.GONE);
                 mNestedScrollView.setVisibility(View.VISIBLE);
                 mUpcomingMovies = new ArrayList<>(response.body().getResults());
@@ -149,17 +148,17 @@ public class MovieFragment extends Fragment  {
                                 loading = true;
                                 Log.v("Scroll: ", "Last Item reached !");
                                 MovieService movieService = mBuilder.create(MovieService.class);
-                                Call<PopularMovie> popularMovieCall = movieService.getUpcomingMovies(CONSTANTS.API_KEY, 2, "IN");
-                                popularMovieCall.enqueue(new Callback<PopularMovie>() {
+                                Call<WrapperPopularMovie> popularMovieCall = movieService.getUpcomingMovies(CONSTANTS.API_KEY, 2, "IN");
+                                popularMovieCall.enqueue(new Callback<WrapperPopularMovie>() {
                                     @Override
-                                    public void onResponse(Call<PopularMovie> call, Response<PopularMovie> response) {
+                                    public void onResponse(Call<WrapperPopularMovie> call, Response<WrapperPopularMovie> response) {
                                         mUpcomingMovies.addAll(response.body().getResults());
                                         mHorizontalMovieCustomAdapter.notifyDataSetChanged();
                                         loading = false;
                                     }
 
                                     @Override
-                                    public void onFailure(Call<PopularMovie> call, Throwable t) {
+                                    public void onFailure(Call<WrapperPopularMovie> call, Throwable t) {
 
                                     }
                                 });
@@ -171,7 +170,7 @@ public class MovieFragment extends Fragment  {
             }
 
             @Override
-            public void onFailure(Call<PopularMovie> call, Throwable t) {
+            public void onFailure(Call<WrapperPopularMovie> call, Throwable t) {
                 t.printStackTrace();
             }
         });

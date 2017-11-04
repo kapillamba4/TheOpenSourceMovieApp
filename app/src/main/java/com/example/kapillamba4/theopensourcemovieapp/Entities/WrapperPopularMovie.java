@@ -9,7 +9,7 @@ import java.util.List;
  * Created by kapil on 14/10/17.
  */
 
-public class PopularMovie {
+public class WrapperPopularMovie {
     @SerializedName("page")
     @Expose
     private Integer page;

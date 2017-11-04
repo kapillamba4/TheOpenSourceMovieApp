@@ -8,8 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.example.kapillamba4.theopensourcemovieapp.Entities.TvShow;
 import com.example.kapillamba4.theopensourcemovieapp.R;
+import com.example.kapillamba4.theopensourcemovieapp.Utils.CONSTANTS;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -54,12 +56,16 @@ public class HorizontalTvCustomAdapter extends RecyclerView.Adapter<HorizontalTv
         holder.mTitle.setText(mtvItem.getName());
         holder.mRating.setText(String.valueOf(mtvItem.getVoteAverage()));
         holder.id = String.valueOf(mtvItem.getId());
-        Picasso.with(mContext).load("https://image.tmdb.org/t/p/w185" + mtvItem.getPosterPath()).into(holder.mImageView);
+        Picasso.with(mContext).load(CONSTANTS.BASE_POSTER_URL_SMALL + mtvItem.getPosterPath()).into(holder.mImageView);
     }
 
     @Override
     public int getItemCount() {
         return mTvShow.size();
+    }
+
+    public interface onClickCustomListener {
+        void onItemClick(String id, String type);
     }
 
     static class TvViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -82,13 +88,5 @@ public class HorizontalTvCustomAdapter extends RecyclerView.Adapter<HorizontalTv
         public void onClick(View view) {
             Log.i("Tv Item Click", "true");
         }
-    }
-
-    public void setClickListener(onClickCustomListener callback) {
-        mOnItemClickListener = callback;
-    }
-
-    public interface onClickCustomListener {
-        void onItemClick(String id, String type);
     }
 }
