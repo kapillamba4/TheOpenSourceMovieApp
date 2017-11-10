@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements HorizontalMovieCu
     @Override
     public void onBackPressed() {
 
-        Snackbar.make(findViewById(R.id.root_layout), "Do you want to exit?", Snackbar.LENGTH_SHORT).setAction("Exit", new View.OnClickListener() {
+        Snackbar.make(findViewById(R.id.frame_content), "Do you want to exit?", Snackbar.LENGTH_SHORT).setAction("Exit", new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 MainActivity.super.onBackPressed();
