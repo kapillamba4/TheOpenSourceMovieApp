@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -107,6 +108,17 @@ public class MainActivity extends AppCompatActivity implements HorizontalMovieCu
         return super.onCreateOptionsMenu(menu);
     }
 
+    @Override
+    public void onBackPressed() {
+
+        Snackbar.make(findViewById(R.id.root_layout), "Do you want to exit?", Snackbar.LENGTH_SHORT).setAction("Exit", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity.super.onBackPressed();
+            }
+        }).show();
+
+    }
 
     @Override
     public boolean onQueryTextSubmit(String s) {
@@ -137,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements HorizontalMovieCu
                 intent.putExtra("id", id);
                 intent.putExtra("type", type);
                 startActivity(intent);
-                Toast.makeText(this, "TV "+id, Toast.LENGTH_SHORT);
+                Toast.makeText(this, "TV " + id, Toast.LENGTH_SHORT);
                 break;
             case "movie":
                 intent = new Intent(this, DetailActivity.class);
