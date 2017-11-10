@@ -81,8 +81,8 @@ public class MainActivity extends AppCompatActivity implements HorizontalMovieCu
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mBottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
-        mCheckConnection = (TextView) findViewById(R.id.check_connection);
+        mBottomNavigationView = findViewById(R.id.navigation);
+        mCheckConnection = findViewById(R.id.check_connection);
         mBottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         mNetworkChangeReceiver = new NetworkChangeReceiver();
         registerNetworkBroadcastForNougat();
@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements HorizontalMovieCu
     public boolean onQueryTextSubmit(String s) {
         mSearchMenu.collapseActionView();
         Intent intent = new Intent(MainActivity.this, SearchActivity.class);
-        intent.putExtra("query", s);
+        intent.putExtra(SearchManager.QUERY, s);
         startActivity(intent);
         return true;
     }

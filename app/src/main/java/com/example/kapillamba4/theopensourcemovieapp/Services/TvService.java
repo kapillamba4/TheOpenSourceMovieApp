@@ -19,7 +19,6 @@ public interface TvService {
     @GET("tv/top_rated")
     Call<WrapperTvShow> getTopRatedTvShows(@Query("api_key") String apiKey, @Query("page") Integer page);
 
-    // TODO
     @GET("tv/airing_today")
     Call<WrapperTvShow> getAiringTvShows(@Query("api_key") String apiKey, @Query("page") Integer page);
 

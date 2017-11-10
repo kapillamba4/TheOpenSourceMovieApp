@@ -1,5 +1,6 @@
 package com.example.kapillamba4.theopensourcemovieapp.Services;
 
+import com.example.kapillamba4.theopensourcemovieapp.Entities.MultiSearch;
 import com.example.kapillamba4.theopensourcemovieapp.Entities.ResourceImage;
 import com.example.kapillamba4.theopensourcemovieapp.Entities.WrapperImage;
 import com.example.kapillamba4.theopensourcemovieapp.Entities.WrapperVideo;
@@ -19,4 +20,7 @@ public interface CommonService {
 
     @GET("{type}/{id}/images")
     Call<WrapperImage> getImages(@Path("type") String type, @Path("id") String id, @Query("api_key") String apiKey);
+
+    @GET("search/multi")
+    Call<MultiSearch> getSearchResult(@Query("api_key") String apiKey, @Query("query") String query, @Query("page") String page);
 }

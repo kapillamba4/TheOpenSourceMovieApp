@@ -22,12 +22,6 @@ public class SearchItem {
     @SerializedName("name")
     @Expose
     private String name;
-    @SerializedName("vote_count")
-    @Expose
-    private Integer voteCount;
-    @SerializedName("vote_average")
-    @Expose
-    private Integer voteAverage;
     @SerializedName("poster_path")
     @Expose
     private String posterPath;
@@ -98,22 +92,6 @@ public class SearchItem {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Integer getVoteCount() {
-        return voteCount;
-    }
-
-    public void setVoteCount(Integer voteCount) {
-        this.voteCount = voteCount;
-    }
-
-    public Integer getVoteAverage() {
-        return voteAverage;
-    }
-
-    public void setVoteAverage(Integer voteAverage) {
-        this.voteAverage = voteAverage;
     }
 
     public String getPosterPath() {

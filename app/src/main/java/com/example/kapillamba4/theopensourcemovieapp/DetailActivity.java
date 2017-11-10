@@ -126,19 +126,21 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                             }
                         });
 
-//                        wrapperVideoCall.enqueue(new Callback<WrapperVideo>() {
-//                            @Override
-//                            public void onResponse(Call<WrapperVideo> call, Response<WrapperVideo> response) {
-//                                mVideos = new ArrayList<>(response.body().getResults());
-//
-//
-//                            }
-//
-//                            @Override
-//                            public void onFailure(Call<WrapperVideo> call, Throwable t) {
-//
-//                            }
-//                        });
+                        wrapperVideoCall.enqueue(new Callback<WrapperVideo>() {
+                            @Override
+                            public void onResponse(Call<WrapperVideo> call, Response<WrapperVideo> response) {
+                                mVideos = new ArrayList<>(response.body().getResults());
+                                ArrayList<String> urls = new ArrayList<>();
+                                for(ResourceVideo video: mVideos) {
+                                    urls.add(video.getKey());
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<WrapperVideo> call, Throwable t) {
+
+                            }
+                        });
 
                         mTitle.setText(mDetailTv.getName());
                         mOverview.setText(mDetailTv.getOverview());
