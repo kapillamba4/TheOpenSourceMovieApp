@@ -31,12 +31,16 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MovieFragment extends Fragment  {
-    NestedScrollView mNestedScrollView;
-    ProgressBar mProgressBar;
-    ArrayList<Movie> mPopularMovies = new ArrayList<>();
-    ArrayList<Movie> mTopRatedMovies = new ArrayList<>();
-    ArrayList<Movie> mUpcomingMovies = new ArrayList<>();
-    Retrofit mBuilder;
+    private NestedScrollView mNestedScrollView;
+    private ProgressBar mProgressBar;
+    private ArrayList<Movie> mPopularMovies = new ArrayList<>();
+    private int mPopularMoviesPage = 0;
+    private ArrayList<Movie> mTopRatedMovies = new ArrayList<>();
+    private int mTopRatedMoviesPage = 0;
+    private ArrayList<Movie> mUpcomingMovies = new ArrayList<>();
+    private int mUpcomingMoviesPage = 0;
+
+    private Retrofit mBuilder;
     private boolean loading  = false;
 
     public MovieFragment() {
@@ -138,7 +142,6 @@ public class MovieFragment extends Fragment  {
                     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                         super.onScrolled(recyclerView, dx, dy);
                         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-                        //Toast.makeText(getContext(), "Hello", Toast.LENGTH_SHORT).show();
                         int visibleItemCount = 0, totalItemCount = 0, pastVisiblesItems = 0;
                         if (dx > 0 && !loading) {
                             visibleItemCount = recyclerView.getLayoutManager().getChildCount();
@@ -184,7 +187,7 @@ public class MovieFragment extends Fragment  {
         mProgressBar = view.findViewById(R.id.movie_progress_bar);
 
         mBuilder = new Retrofit.Builder()
-                .baseUrl(CONSTANTS.BASE_URL)
+                .baseUrl(CONSTANTS.BASE_API_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

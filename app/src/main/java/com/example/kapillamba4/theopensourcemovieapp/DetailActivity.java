@@ -5,6 +5,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,9 +15,15 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.kapillamba4.theopensourcemovieapp.Adapters.ImagesAdapter;
 import com.example.kapillamba4.theopensourcemovieapp.Entities.DetailMovie;
 import com.example.kapillamba4.theopensourcemovieapp.Entities.DetailTv;
 import com.example.kapillamba4.theopensourcemovieapp.Entities.Genre;
+import com.example.kapillamba4.theopensourcemovieapp.Entities.ResourceImage;
+import com.example.kapillamba4.theopensourcemovieapp.Entities.ResourceVideo;
+import com.example.kapillamba4.theopensourcemovieapp.Entities.WrapperImage;
+import com.example.kapillamba4.theopensourcemovieapp.Entities.WrapperVideo;
+import com.example.kapillamba4.theopensourcemovieapp.Services.CommonService;
 import com.example.kapillamba4.theopensourcemovieapp.Services.MovieService;
 import com.example.kapillamba4.theopensourcemovieapp.Services.TvService;
 import com.example.kapillamba4.theopensourcemovieapp.Utils.CONSTANTS;
@@ -39,6 +47,10 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     private TextView mTitle, mStatus, mReleaseDate, mGenre, mOverview;
     private DetailTv mDetailTv;
     private DetailMovie mDetailMovie;
+    private ArrayList<ResourceImage> mImages = new ArrayList<>();
+    private ArrayList<ResourceVideo> mVideos = new ArrayList<>();
+//    private ArrayList<String> mCastImages = new ArrayList<>();
+//    private ArrayList<String> mCastNames = new ArrayList<>();
     private ArrayList<String> mGenres = new ArrayList<>();
     private Retrofit mBuilder;
 
@@ -63,7 +75,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         id = getIntent().getStringExtra("id");
         type = getIntent().getStringExtra("type");
         mBuilder = new Retrofit.Builder()
-                .baseUrl(CONSTANTS.BASE_URL)
+                .baseUrl(CONSTANTS.BASE_API_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -84,6 +96,49 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                         for (String genre : mGenres) {
                             mGenre.setText(mGenre.getText() + genre + " | ");
                         }
+
+                        CommonService commonService = mBuilder.create(CommonService.class);
+                        Call<WrapperImage> wrapperImageCall = commonService.getImages(type, mDetailTv.getId().toString(), CONSTANTS.API_KEY);
+                        Call<WrapperVideo> wrapperVideoCall = commonService.getVideos(type, mDetailTv.getId().toString(), CONSTANTS.API_KEY);
+
+                        final LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(DetailActivity.this, LinearLayoutManager.HORIZONTAL, false);
+                        horizontalLayoutManager.canScrollHorizontally();
+
+                        wrapperImageCall.enqueue(new Callback<WrapperImage>() {
+                            @Override
+                            public void onResponse(Call<WrapperImage> call, Response<WrapperImage> response) {
+                                mImages = new ArrayList<>(response.body().getPosters());
+                                ArrayList<String> urls = new ArrayList<>();
+                                for(ResourceImage image: mImages) {
+                                    urls.add(image.getFilePath());
+                                }
+
+                                ImagesAdapter imagesAdapter = new ImagesAdapter(DetailActivity.this, urls);
+                                RecyclerView recyclerView = findViewById(R.id.images);
+                                recyclerView.setAdapter(imagesAdapter);
+                                recyclerView.setLayoutManager(horizontalLayoutManager) ;
+                                imagesAdapter.notifyDataSetChanged();
+                            }
+
+                            @Override
+                            public void onFailure(Call<WrapperImage> call, Throwable t) {
+
+                            }
+                        });
+
+//                        wrapperVideoCall.enqueue(new Callback<WrapperVideo>() {
+//                            @Override
+//                            public void onResponse(Call<WrapperVideo> call, Response<WrapperVideo> response) {
+//                                mVideos = new ArrayList<>(response.body().getResults());
+//
+//
+//                            }
+//
+//                            @Override
+//                            public void onFailure(Call<WrapperVideo> call, Throwable t) {
+//
+//                            }
+//                        });
 
                         mTitle.setText(mDetailTv.getName());
                         mOverview.setText(mDetailTv.getOverview());

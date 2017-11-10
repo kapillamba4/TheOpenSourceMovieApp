@@ -9,7 +9,7 @@
         android:id="@+id/cover"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop" />
 
     <View
         android:id="@+id/black_mask"
@@ -26,161 +26,203 @@
         android:paddingTop="400dp"
         android:scrollbars="none">
 
-        <FrameLayout
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <android.support.v7.widget.CardView
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/default_margin_medium"
-                card_view:cardBackgroundColor="@color/white"
-                card_view:cardCornerRadius="@dimen/corner_radius"
-                card_view:cardElevation="@dimen/card_elevation"
-                card_view:cardUseCompatPadding="true"
-                card_view:contentPadding="@dimen/default_margin_medium">
+                android:layout_height="wrap_content">
 
-                <LinearLayout
+                <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/title"
-                        style="@style/HeaderStyle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:ellipsize="end"
-                        android:gravity="center_vertical"
-                        android:maxLines="2"
-                        android:textSize="@dimen/text_large"
-                        tools:text="Title" />
-
-                    <TextView
-                        android:id="@+id/status"
-                        style="@style/CustomStyle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/ic_action_calendar_month"
-                        android:drawablePadding="@dimen/default_padding_small"
-                        android:minHeight="@dimen/default_height_medium"
-                        android:text="release status" />
-
-                    <TextView
-                        android:id="@+id/release_date"
-                        style="@style/CustomStyle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/ic_date_range"
-                        android:drawablePadding="@dimen/default_padding_small"
-                        android:minHeight="@dimen/default_height_medium"
-                        android:text="  date" />
-
-                    <TextView
-                        android:id="@+id/genre"
-                        style="@style/CustomStyle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/ic_language"
-                        android:drawablePadding="@dimen/default_padding_small"
-                        android:minHeight="@dimen/default_height_medium"
-                        android:text="  genre 1, genre 2, genre 3" />
-
-                    <!--<LinearLayout-->
-                        <!--android:id="@+id/tagline_container"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:orientation="vertical">-->
-
-                        <!--<TextView-->
-                            <!--style="@style/HeaderStyle"-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:text="Tagline" />-->
-
-                        <!--<TextView-->
-                            <!--android:id="@+id/tagline"-->
-                            <!--style="@style/CustomStyle"-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:text="set tagline here." />-->
-
-                    <!--</LinearLayout>-->
+                    android:layout_margin="@dimen/default_margin_medium"
+                    card_view:cardBackgroundColor="@color/white"
+                    card_view:cardCornerRadius="@dimen/corner_radius"
+                    card_view:cardElevation="@dimen/card_elevation"
+                    card_view:cardUseCompatPadding="true"
+                    card_view:contentPadding="@dimen/default_margin_medium">
 
                     <LinearLayout
-                        android:id="@+id/overview_container"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/title"
                             style="@style/HeaderStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="overview" />
+                            android:ellipsize="end"
+                            android:gravity="center_vertical"
+                            android:maxLines="2"
+                            android:textSize="@dimen/text_large"
+                            tools:text="Title" />
 
                         <TextView
-                            android:id="@+id/overview"
+                            android:id="@+id/status"
                             style="@style/CustomStyle"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@drawable/ic_action_calendar_month"
+                            android:drawablePadding="@dimen/default_padding_small"
+                            android:minHeight="@dimen/default_height_medium"
+                            android:text="release status" />
 
+                        <TextView
+                            android:id="@+id/release_date"
+                            style="@style/CustomStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@drawable/ic_date_range"
+                            android:drawablePadding="@dimen/default_padding_small"
+                            android:minHeight="@dimen/default_height_medium"
+                            android:text="  date" />
+
+                        <TextView
+                            android:id="@+id/genre"
+                            style="@style/CustomStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@drawable/ic_language"
+                            android:drawablePadding="@dimen/default_padding_small"
+                            android:minHeight="@dimen/default_height_medium"
+                            android:text="  genre 1, genre 2, genre 3" />
+
+                        <LinearLayout
+                            android:id="@+id/overview_container"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                style="@style/HeaderStyle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="overview" />
+
+                            <TextView
+                                android:id="@+id/overview"
+                                style="@style/CustomStyle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
                     </LinearLayout>
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
+                </android.support.v7.widget.CardView>
 
-            <!-- TODO: Add ripple effect -->
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/favourites_fab"
+                <!-- TODO: Add ripple effect -->
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/favourites_fab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|end"
+                    android:layout_marginTop="-16dp"
+                    android:background="@color/colorAccent"
+                    android:clickable="true"
+                    android:src="@drawable/ic_favorite" />
+            </FrameLayout>
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="top|end"
-                android:layout_marginTop="-16dp"
-                android:background="@color/colorAccent"
-                android:clickable="true"
-                android:src="@drawable/ic_favorite" />
+                android:layout_margin="@dimen/default_margin_small"
+                android:layout_gravity="center_horizontal"
+                android:text="Images:"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_medium" />
 
-        </FrameLayout>
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/images"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </android.support.v7.widget.RecyclerView>
+
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/default_margin_small"
+                android:layout_gravity="center_horizontal"
+                android:text="Trailers:"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_medium" />
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/trailers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/default_margin_small"
+                android:layout_gravity="center_horizontal"
+                android:text="Cast:"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_medium" />
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cast"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
 
         <!--<include-->
-            <!--android:id="@+id/progress_bar"-->
-            <!--android:layout="@layout/view_loading"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"/>-->
+        <!--android:id="@+id/progress_bar"-->
+        <!--android:layout="@layout/view_loading"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"/>-->
 
         <!--<FrameLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content">-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
 
-            <!--<android.support.v7.widget.CardView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_margin="@dimen/default_margin_medium"-->
-                <!--card_view:cardBackgroundColor="@color/white"-->
-                <!--card_view:cardCornerRadius="@dimen/corner_radius"-->
-                <!--card_view:cardElevation="@dimen/card_elevation"-->
-                <!--card_view:cardUseCompatPadding="true"-->
-                <!--card_view:contentPadding="@dimen/default_margin_medium">-->
+        <!--<android.support.v7.widget.CardView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="@dimen/default_margin_medium"-->
+        <!--card_view:cardBackgroundColor="@color/white"-->
+        <!--card_view:cardCornerRadius="@dimen/corner_radius"-->
+        <!--card_view:cardElevation="@dimen/card_elevation"-->
+        <!--card_view:cardUseCompatPadding="true"-->
+        <!--card_view:contentPadding="@dimen/default_margin_medium">-->
 
-                <!--<android.support.v7.app.AlertController.RecycleListView-->
-                    <!--android:id="@+id/trailers"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:nestedScrollingEnabled="true">-->
+        <!--<android.support.v7.app.AlertController.RecycleListView-->
+        <!--android:id="@+id/trailers"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:nestedScrollingEnabled="true">-->
 
-                <!--</android.support.v7.app.AlertController.RecycleListView>-->
-            <!--</android.support.v7.widget.CardView>-->
+        <!--</android.support.v7.app.AlertController.RecycleListView>-->
+        <!--</android.support.v7.widget.CardView>-->
         <!--</FrameLayout>-->
 
 
     </android.support.v4.widget.NestedScrollView>
 
     <!--<ImageView-->
-        <!--android:id="@+id/detail_activity_back_button"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="top|left"-->
-        <!--android:src="@drawable/ic_keyboard_backspace"/>-->
+    <!--android:id="@+id/detail_activity_back_button"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="top|left"-->
+    <!--android:src="@drawable/ic_keyboard_backspace"/>-->
 
 
 </FrameLayout>

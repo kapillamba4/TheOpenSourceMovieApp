@@ -29,12 +29,16 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class TvFragment extends Fragment {
-    ProgressBar mProgressBar;
-    NestedScrollView mNestedScrollView;
-    ArrayList<TvShow> mPopularTvShows = new ArrayList<>();
-    ArrayList<TvShow> mTopRatedTvShows = new ArrayList<>();
-    ArrayList<TvShow> mAiringTvShows = new ArrayList<>();
-    Retrofit mBuilder;
+    private ProgressBar mProgressBar;
+    private NestedScrollView mNestedScrollView;
+    private ArrayList<TvShow> mPopularTvShows = new ArrayList<>();
+    private int mPopularTvShowsPage = 0;
+    private ArrayList<TvShow> mTopRatedTvShows = new ArrayList<>();
+    private int mTopRatedTvShowsPage = 0;
+    private ArrayList<TvShow> mAiringTvShows = new ArrayList<>();
+    private int mAiringTvShowsPage = 0;
+
+    private Retrofit mBuilder;
 
     public TvFragment() {
         // Required empty public constructor
@@ -126,7 +130,7 @@ public class TvFragment extends Fragment {
         mNestedScrollView = view.findViewById(R.id.tv_scroll_view);
         mProgressBar = view.findViewById(R.id.tv_progress_bar);
         mBuilder = new Retrofit.Builder()
-                .baseUrl(CONSTANTS.BASE_URL)
+                .baseUrl(CONSTANTS.BASE_API_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
