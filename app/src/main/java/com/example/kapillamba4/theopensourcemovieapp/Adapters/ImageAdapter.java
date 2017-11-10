@@ -1,11 +1,11 @@
 package com.example.kapillamba4.theopensourcemovieapp.Adapters;
 
 import android.content.Context;
+import android.support.annotation.LayoutRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 
 import com.example.kapillamba4.theopensourcemovieapp.R;
@@ -18,24 +18,28 @@ import java.util.ArrayList;
  * Created by kapil on 10/11/17.
  */
 
-public class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.ImageViewHolder> {
+public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHolder> {
     private ArrayList<String> mImages;
     private Context mContext;
+    private int mLayoutId;
+    private String mBaseImageUrl;
 
-    public ImagesAdapter(Context context, ArrayList<String> urls) {
+    public ImageAdapter(Context context, ArrayList<String> urls, @LayoutRes int id, String baseImageUrl) {
         mImages = urls;
         mContext = context;
+        mLayoutId = id;
+        mBaseImageUrl = baseImageUrl;
     }
 
     @Override
-    public ImagesAdapter.ImageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View inflatedView = LayoutInflater.from(mContext).inflate(R.layout.image, parent, false);
+    public ImageAdapter.ImageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View inflatedView = LayoutInflater.from(mContext).inflate(mLayoutId, parent, false);
         return new ImageViewHolder(inflatedView);
     }
 
     @Override
-    public void onBindViewHolder(ImagesAdapter.ImageViewHolder holder, int position) {
-        Picasso.with(mContext).load(CONSTANTS.BASE_POSTER_URL_SMALL+mImages.get(position)).into(holder.mImageView);
+    public void onBindViewHolder(ImageAdapter.ImageViewHolder holder, int position) {
+        Picasso.with(mContext).load(mBaseImageUrl+mImages.get(position)).into(holder.mImageView);
     }
 
     @Override

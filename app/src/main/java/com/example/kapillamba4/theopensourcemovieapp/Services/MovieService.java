@@ -1,6 +1,7 @@
 package com.example.kapillamba4.theopensourcemovieapp.Services;
 
 import com.example.kapillamba4.theopensourcemovieapp.Entities.DetailMovie;
+import com.example.kapillamba4.theopensourcemovieapp.Entities.WrapperCast;
 import com.example.kapillamba4.theopensourcemovieapp.Entities.WrapperMovie;
 
 import retrofit2.Call;

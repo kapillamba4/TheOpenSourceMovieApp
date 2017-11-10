@@ -15,12 +15,14 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.kapillamba4.theopensourcemovieapp.Adapters.ImagesAdapter;
+import com.example.kapillamba4.theopensourcemovieapp.Adapters.ImageAdapter;
+import com.example.kapillamba4.theopensourcemovieapp.Entities.Cast;
 import com.example.kapillamba4.theopensourcemovieapp.Entities.DetailMovie;
 import com.example.kapillamba4.theopensourcemovieapp.Entities.DetailTv;
 import com.example.kapillamba4.theopensourcemovieapp.Entities.Genre;
 import com.example.kapillamba4.theopensourcemovieapp.Entities.ResourceImage;
 import com.example.kapillamba4.theopensourcemovieapp.Entities.ResourceVideo;
+import com.example.kapillamba4.theopensourcemovieapp.Entities.WrapperCast;
 import com.example.kapillamba4.theopensourcemovieapp.Entities.WrapperImage;
 import com.example.kapillamba4.theopensourcemovieapp.Entities.WrapperVideo;
 import com.example.kapillamba4.theopensourcemovieapp.Services.CommonService;
@@ -47,9 +49,10 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     private TextView mTitle, mStatus, mReleaseDate, mGenre, mOverview;
     private DetailTv mDetailTv;
     private DetailMovie mDetailMovie;
-    private ArrayList<ResourceImage> mImages = new ArrayList<>();
+    private ArrayList<ResourceImage> mPosters = new ArrayList<>();
+    private ArrayList<ResourceImage> mBackdrops = new ArrayList<>();
     private ArrayList<ResourceVideo> mVideos = new ArrayList<>();
-//    private ArrayList<String> mCastImages = new ArrayList<>();
+    private ArrayList<Cast> mCast = new ArrayList<>();
 //    private ArrayList<String> mCastNames = new ArrayList<>();
     private ArrayList<String> mGenres = new ArrayList<>();
     private Retrofit mBuilder;
@@ -81,7 +84,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
         switch (type) {
             case "tv":
-                TvService tvService = mBuilder.create(TvService.class);
+                final TvService tvService = mBuilder.create(TvService.class);
                 Call<DetailTv> detailTvCall = tvService.getDetailTvShow(id, CONSTANTS.API_KEY);
                 detailTvCall.enqueue(new Callback<DetailTv>() {
                     @Override
@@ -100,24 +103,47 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                         CommonService commonService = mBuilder.create(CommonService.class);
                         Call<WrapperImage> wrapperImageCall = commonService.getImages(type, mDetailTv.getId().toString(), CONSTANTS.API_KEY);
                         Call<WrapperVideo> wrapperVideoCall = commonService.getVideos(type, mDetailTv.getId().toString(), CONSTANTS.API_KEY);
-
-                        final LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(DetailActivity.this, LinearLayoutManager.HORIZONTAL, false);
-                        horizontalLayoutManager.canScrollHorizontally();
+                        Call<WrapperCast> wrapperCastCall = commonService.getCastMovie(type, mDetailTv.getId().toString(), CONSTANTS.API_KEY);
 
                         wrapperImageCall.enqueue(new Callback<WrapperImage>() {
                             @Override
                             public void onResponse(Call<WrapperImage> call, Response<WrapperImage> response) {
-                                mImages = new ArrayList<>(response.body().getPosters());
-                                ArrayList<String> urls = new ArrayList<>();
-                                for(ResourceImage image: mImages) {
-                                    urls.add(image.getFilePath());
+                                mPosters = new ArrayList<>(response.body().getPosters());
+                                ArrayList<String> posterUrls = new ArrayList<>();
+                                ArrayList<String> backdropUrls = new ArrayList<>();
+                                for(ResourceImage image: mPosters) {
+                                    posterUrls.add(image.getFilePath());
                                 }
 
-                                ImagesAdapter imagesAdapter = new ImagesAdapter(DetailActivity.this, urls);
-                                RecyclerView recyclerView = findViewById(R.id.images);
-                                recyclerView.setAdapter(imagesAdapter);
-                                recyclerView.setLayoutManager(horizontalLayoutManager) ;
-                                imagesAdapter.notifyDataSetChanged();
+//                                mImages = new ArrayList<>(response.body().getBackdrops());
+//                                for(ResourceImage image: mImages) {
+//                                    urls.add(image.getFilePath());
+//                                }
+//
+                                mBackdrops = new ArrayList<>(response.body().getBackdrops());
+                                for(ResourceImage image: mBackdrops) {
+                                    backdropUrls.add(image.getFilePath());
+                                }
+
+                                ImageAdapter posterAdapter = new ImageAdapter(DetailActivity.this, posterUrls, R.layout.image, CONSTANTS.BASE_POSTER_URL_SMALL);
+                                ImageAdapter backdropAdapter = new ImageAdapter(DetailActivity.this, backdropUrls, R.layout.image, CONSTANTS.BASE_POSTER_URL_MEDIUM);
+                                RecyclerView posterRecyclerView = findViewById(R.id.posters);
+                                RecyclerView backdropRecyclerView = findViewById(R.id.backdrops);
+                                posterRecyclerView.setAdapter(posterAdapter);
+                                backdropRecyclerView.setAdapter(backdropAdapter);
+
+                                LinearLayoutManager horizontalLayoutManager;
+
+                                horizontalLayoutManager = new LinearLayoutManager(DetailActivity.this, LinearLayoutManager.HORIZONTAL, false);
+                                horizontalLayoutManager.canScrollHorizontally();
+                                posterRecyclerView.setLayoutManager(horizontalLayoutManager);
+
+                                horizontalLayoutManager = new LinearLayoutManager(DetailActivity.this, LinearLayoutManager.HORIZONTAL, false);
+                                horizontalLayoutManager.canScrollHorizontally();
+                                backdropRecyclerView.setLayoutManager(horizontalLayoutManager);
+
+                                posterAdapter.notifyDataSetChanged();
+                                backdropAdapter.notifyDataSetChanged();
                             }
 
                             @Override
@@ -126,14 +152,11 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                             }
                         });
 
+
                         wrapperVideoCall.enqueue(new Callback<WrapperVideo>() {
                             @Override
                             public void onResponse(Call<WrapperVideo> call, Response<WrapperVideo> response) {
-                                mVideos = new ArrayList<>(response.body().getResults());
-                                ArrayList<String> urls = new ArrayList<>();
-                                for(ResourceVideo video: mVideos) {
-                                    urls.add(video.getKey());
-                                }
+
                             }
 
                             @Override
@@ -146,6 +169,32 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                         mOverview.setText(mDetailTv.getOverview());
                         mStatus.setText(mDetailTv.getStatus());
                         mReleaseDate.setText(" " + mDetailTv.getFirstAirDate());
+                        wrapperCastCall.enqueue(new Callback<WrapperCast>() {
+                            @Override
+                            public void onResponse(Call<WrapperCast> call, Response<WrapperCast> response) {
+                                mCast = new ArrayList<>(response.body().getCast());
+                                ArrayList<String> mCastUrls = new ArrayList<>();
+                                for(Cast cast: mCast) {
+                                    mCastUrls.add(cast.getProfilePath());
+                                }
+
+                                ImageAdapter imageAdapter = new ImageAdapter(DetailActivity.this, mCastUrls, R.layout.cast, CONSTANTS.BASE_POSTER_URL_SMALL);
+                                RecyclerView recyclerView = findViewById(R.id.cast);
+                                recyclerView.setAdapter(imageAdapter);
+                                LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(DetailActivity.this, LinearLayoutManager.HORIZONTAL, false);
+                                horizontalLayoutManager.canScrollHorizontally();
+
+                                recyclerView.setLayoutManager(horizontalLayoutManager);
+                                imageAdapter.notifyDataSetChanged();
+                            }
+
+                            @Override
+                            public void onFailure(Call<WrapperCast> call, Throwable t) {
+
+                            }
+                        });
+
+
 //                      mProgressBar.setVisibility(View.GONE);
                     }
 
@@ -154,6 +203,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                         Log.i("Api Call: ", "Failure");
                     }
                 });
+
 
                 break;
             case "movie":
