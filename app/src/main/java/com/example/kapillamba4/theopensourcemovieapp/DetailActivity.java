@@ -6,8 +6,11 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.kapillamba4.theopensourcemovieapp.Entities.DetailMovie;
@@ -31,8 +34,9 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     private ImageView mCover;
     private View mBlackMask;
     private NestedScrollView mNestedScrollView;
+    private ProgressBar mProgressBar;
     private FloatingActionButton mFavFab;
-    private TextView mTitle, mStatus, mReleaseDate, mGenre, mTagline, mOverview;
+    private TextView mTitle, mStatus, mReleaseDate, mGenre, mOverview;
     private DetailTv mDetailTv;
     private DetailMovie mDetailMovie;
     private ArrayList<String> mGenres = new ArrayList<>();
@@ -52,7 +56,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         mReleaseDate = findViewById(R.id.release_date);
         mGenre = findViewById(R.id.genre);
         mOverview = findViewById(R.id.overview);
-//        mTagline = findViewById(R.id.tagline);
+       // mProgressBar = findViewById(R.id.progress_bar);
         FloatingActionButton fab = findViewById(R.id.favourites_fab);
         fab.setOnClickListener(this);
 
@@ -75,16 +79,17 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                             mGenres.add(genre.getName());
                         }
 
+                        mGenre.setText("| ");
                         Picasso.with(DetailActivity.this).load(CONSTANTS.BASE_POSTER_URL_LARGE + mDetailTv.getPosterPath()).into(mCover);
                         for (String genre : mGenres) {
                             mGenre.setText(mGenre.getText() + genre + " | ");
                         }
 
                         mTitle.setText(mDetailTv.getName());
-//                        mTagline.setText(mDetailTv.);
                         mOverview.setText(mDetailTv.getOverview());
                         mStatus.setText(mDetailTv.getStatus());
-                        mReleaseDate.setText(mDetailTv.getFirstAirDate());
+                        mReleaseDate.setText(" " + mDetailTv.getFirstAirDate());
+//                      mProgressBar.setVisibility(View.GONE);
                     }
 
                     @Override
@@ -105,23 +110,42 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                             mGenres.add(genre.getName());
                         }
 
-                        Picasso.with(DetailActivity.this).load(CONSTANTS.BASE_POSTER_URL_LARGE + mDetailTv.getPosterPath()).into(mCover);
+                        mGenre.setText("| ");
+                        Picasso.with(DetailActivity.this).load(CONSTANTS.BASE_POSTER_URL_LARGE + mDetailMovie.getPosterPath()).into(mCover);
                         for (String genre : mGenres) {
                             mGenre.setText(mGenre.getText() + genre + " | ");
                         }
 
-                        mTitle.setText(mDetailMovie.getName());
+                        mTitle.setText(mDetailMovie.getTitle());
                         mOverview.setText(mDetailMovie.getOverview());
                         mStatus.setText(mDetailMovie.getStatus());
-                        mReleaseDate.setText(mDetailMovie.getFirstAirDate());
+                        mReleaseDate.setText(mDetailMovie.getReleaseDate());
+//                      mProgressBar.setVisibility(View.GONE);
                     }
 
                     @Override
                     public void onFailure(Call<DetailMovie> call, Throwable t) {
-
+                        Log.i("Api Call: ", "Failure");
                     }
                 });
+
                 break;
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 

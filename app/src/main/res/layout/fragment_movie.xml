@@ -18,7 +18,7 @@
                     android:id="@+id/movie_popular_banner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="8dp">
+                    android:padding="@dimen/default_padding_small">
 
                 <TextView
                         android:layout_width="wrap_content"
@@ -26,7 +26,7 @@
                         android:layout_gravity="left"
                         android:text="Popular Now"
                         android:textColor="@android:color/black"
-                        android:textSize="20sp"/>
+                        android:textSize="@dimen/text_medium"/>
 
                 <TextView
                         android:id="@+id/movie_popular_more"
@@ -36,7 +36,7 @@
                         android:clickable="true"
                         android:text="More"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="14sp"/>
+                        android:textSize="@dimen/text_small"/>
             </FrameLayout>
 
             <android.support.v7.widget.RecyclerView
@@ -49,7 +49,7 @@
                     android:id="@+id/movie_upcoming_banner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="8dp">
+                    android:padding="@dimen/default_padding_small">
 
                 <TextView
                         android:layout_width="wrap_content"
@@ -57,7 +57,7 @@
                         android:layout_gravity="left"
                         android:text="Upcoming"
                         android:textColor="@android:color/black"
-                        android:textSize="20sp"/>
+                        android:textSize="@dimen/text_medium"/>
 
                 <TextView
                         android:id="@+id/movie_upcoming_more"
@@ -67,7 +67,7 @@
                         android:clickable="true"
                         android:text="More"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="14sp"/>
+                        android:textSize="@dimen/text_small"/>
             </FrameLayout>
 
             <android.support.v7.widget.RecyclerView
@@ -80,7 +80,7 @@
                     android:id="@+id/movie_top_rated_banner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="8dp">
+                    android:padding="@dimen/default_padding_small">
 
                 <TextView
                         android:layout_width="wrap_content"
@@ -88,7 +88,7 @@
                         android:layout_gravity="left"
                         android:text="Top Rated"
                         android:textColor="@android:color/black"
-                        android:textSize="20sp"/>
+                        android:textSize="@dimen/text_medium"/>
 
                 <TextView
                         android:id="@+id/movie_top_rated_more"
@@ -98,7 +98,7 @@
                         android:clickable="true"
                         android:text="More"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="14sp"/>
+                        android:textSize="@dimen/text_small"/>
             </FrameLayout>
 
             <android.support.v7.widget.RecyclerView

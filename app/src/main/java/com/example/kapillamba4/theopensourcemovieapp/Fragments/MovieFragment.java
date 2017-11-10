@@ -17,7 +17,7 @@ import android.widget.ProgressBar;
 
 import com.example.kapillamba4.theopensourcemovieapp.Adapters.HorizontalMovieCustomAdapter;
 import com.example.kapillamba4.theopensourcemovieapp.Entities.Movie;
-import com.example.kapillamba4.theopensourcemovieapp.Entities.WrapperPopularMovie;
+import com.example.kapillamba4.theopensourcemovieapp.Entities.WrapperMovie;
 import com.example.kapillamba4.theopensourcemovieapp.R;
 import com.example.kapillamba4.theopensourcemovieapp.Services.MovieService;
 import com.example.kapillamba4.theopensourcemovieapp.Utils.CONSTANTS;
@@ -58,10 +58,10 @@ public class MovieFragment extends Fragment  {
         mSnapHelper.attachToRecyclerView(mRecyclerView);
 
         MovieService movieService = mBuilder.create(MovieService.class);
-        Call<WrapperPopularMovie> popularMovieCall = movieService.getPopularMovies(CONSTANTS.API_KEY, 1, "IN");
-        popularMovieCall.enqueue(new Callback<WrapperPopularMovie>() {
+        Call<WrapperMovie> popularMovieCall = movieService.getPopularMovies(CONSTANTS.API_KEY, 1, "IN");
+        popularMovieCall.enqueue(new Callback<WrapperMovie>() {
             @Override
-            public void onResponse(Call<WrapperPopularMovie> call, Response<WrapperPopularMovie> response) {
+            public void onResponse(Call<WrapperMovie> call, Response<WrapperMovie> response) {
                 mProgressBar.setVisibility(View.GONE);
                 mNestedScrollView.setVisibility(View.VISIBLE);
                 mPopularMovies = new ArrayList<>(response.body().getResults());
@@ -71,7 +71,7 @@ public class MovieFragment extends Fragment  {
             }
 
             @Override
-            public void onFailure(Call<WrapperPopularMovie> call, Throwable t) {
+            public void onFailure(Call<WrapperMovie> call, Throwable t) {
                 t.printStackTrace();
             }
         });
@@ -88,10 +88,10 @@ public class MovieFragment extends Fragment  {
         mSnapHelper.attachToRecyclerView(mRecyclerView);
 
         MovieService movieService = mBuilder.create(MovieService.class);
-        Call<WrapperPopularMovie> popularMovieCall = movieService.getTopRatedMovies(CONSTANTS.API_KEY, 1, "IN");
-        popularMovieCall.enqueue(new Callback<WrapperPopularMovie>() {
+        Call<WrapperMovie> popularMovieCall = movieService.getTopRatedMovies(CONSTANTS.API_KEY, 1, "IN");
+        popularMovieCall.enqueue(new Callback<WrapperMovie>() {
             @Override
-            public void onResponse(Call<WrapperPopularMovie> call, Response<WrapperPopularMovie> response) {
+            public void onResponse(Call<WrapperMovie> call, Response<WrapperMovie> response) {
                 mProgressBar.setVisibility(View.GONE);
                 mNestedScrollView.setVisibility(View.VISIBLE);
                 mTopRatedMovies = new ArrayList<>(response.body().getResults());
@@ -101,7 +101,7 @@ public class MovieFragment extends Fragment  {
             }
 
             @Override
-            public void onFailure(Call<WrapperPopularMovie> call, Throwable t) {
+            public void onFailure(Call<WrapperMovie> call, Throwable t) {
                 t.printStackTrace();
             }
         });
@@ -118,10 +118,10 @@ public class MovieFragment extends Fragment  {
         mSnapHelper.attachToRecyclerView(mRecyclerView);
 
         MovieService movieService = mBuilder.create(MovieService.class);
-        Call<WrapperPopularMovie> popularMovieCall = movieService.getUpcomingMovies(CONSTANTS.API_KEY, 1, "IN");
-        popularMovieCall.enqueue(new Callback<WrapperPopularMovie>() {
+        Call<WrapperMovie> popularMovieCall = movieService.getUpcomingMovies(CONSTANTS.API_KEY, 1, "IN");
+        popularMovieCall.enqueue(new Callback<WrapperMovie>() {
             @Override
-            public void onResponse(Call<WrapperPopularMovie> call, Response<WrapperPopularMovie> response) {
+            public void onResponse(Call<WrapperMovie> call, Response<WrapperMovie> response) {
                 mProgressBar.setVisibility(View.GONE);
                 mNestedScrollView.setVisibility(View.VISIBLE);
                 mUpcomingMovies = new ArrayList<>(response.body().getResults());
@@ -148,17 +148,17 @@ public class MovieFragment extends Fragment  {
                                 loading = true;
                                 Log.v("Scroll: ", "Last Item reached !");
                                 MovieService movieService = mBuilder.create(MovieService.class);
-                                Call<WrapperPopularMovie> popularMovieCall = movieService.getUpcomingMovies(CONSTANTS.API_KEY, 2, "IN");
-                                popularMovieCall.enqueue(new Callback<WrapperPopularMovie>() {
+                                Call<WrapperMovie> popularMovieCall = movieService.getUpcomingMovies(CONSTANTS.API_KEY, 2, "IN");
+                                popularMovieCall.enqueue(new Callback<WrapperMovie>() {
                                     @Override
-                                    public void onResponse(Call<WrapperPopularMovie> call, Response<WrapperPopularMovie> response) {
+                                    public void onResponse(Call<WrapperMovie> call, Response<WrapperMovie> response) {
                                         mUpcomingMovies.addAll(response.body().getResults());
                                         mHorizontalMovieCustomAdapter.notifyDataSetChanged();
                                         loading = false;
                                     }
 
                                     @Override
-                                    public void onFailure(Call<WrapperPopularMovie> call, Throwable t) {
+                                    public void onFailure(Call<WrapperMovie> call, Throwable t) {
 
                                     }
                                 });
@@ -170,7 +170,7 @@ public class MovieFragment extends Fragment  {
             }
 
             @Override
-            public void onFailure(Call<WrapperPopularMovie> call, Throwable t) {
+            public void onFailure(Call<WrapperMovie> call, Throwable t) {
                 t.printStackTrace();
             }
         });

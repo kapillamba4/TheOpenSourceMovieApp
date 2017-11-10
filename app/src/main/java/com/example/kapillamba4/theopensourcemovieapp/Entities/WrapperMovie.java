@@ -9,19 +9,20 @@ import java.util.List;
  * Created by kapil on 14/10/17.
  */
 
-public class WrapperPopularMovie {
+public class WrapperMovie {
+
     @SerializedName("page")
     @Expose
     private Integer page;
+    @SerializedName("results")
+    @Expose
+    private List<Movie> results = null;
     @SerializedName("total_results")
     @Expose
     private Integer totalResults;
     @SerializedName("total_pages")
     @Expose
     private Integer totalPages;
-    @SerializedName("results")
-    @Expose
-    private List<Movie> results = null;
 
     public Integer getPage() {
         return page;
@@ -29,6 +30,14 @@ public class WrapperPopularMovie {
 
     public void setPage(Integer page) {
         this.page = page;
+    }
+
+    public List<Movie> getResults() {
+        return results;
+    }
+
+    public void setResults(List<Movie> results) {
+        this.results = results;
     }
 
     public Integer getTotalResults() {
@@ -45,13 +54,5 @@ public class WrapperPopularMovie {
 
     public void setTotalPages(Integer totalPages) {
         this.totalPages = totalPages;
-    }
-
-    public List<Movie> getResults() {
-        return results;
-    }
-
-    public void setResults(List<Movie> results) {
-        this.results = results;
     }
 }

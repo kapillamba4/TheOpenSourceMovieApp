@@ -1,5 +1,7 @@
 package com.example.kapillamba4.theopensourcemovieapp;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
@@ -12,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,12 +26,12 @@ import com.example.kapillamba4.theopensourcemovieapp.Fragments.TvFragment;
 import com.example.kapillamba4.theopensourcemovieapp.Network.NetworkChangeReceiver;
 
 
-public class MainActivity extends AppCompatActivity implements HorizontalMovieCustomAdapter.onClickCustomListener, HorizontalTvCustomAdapter.onClickCustomListener {
+public class MainActivity extends AppCompatActivity implements HorizontalMovieCustomAdapter.onClickCustomListener, HorizontalTvCustomAdapter.onClickCustomListener, SearchView.OnQueryTextListener {
 
     private static TextView mCheckConnection;
     private NetworkChangeReceiver mNetworkChangeReceiver;
     private BottomNavigationView mBottomNavigationView;
-    private SearchDataAdapter mSearchDataAdapter;
+    private MenuItem mSearchMenu;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -99,7 +102,24 @@ public class MainActivity extends AppCompatActivity implements HorizontalMovieCu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
+        mSearchMenu = menu.findItem(R.id.search);
+        ((SearchView) mSearchMenu.getActionView()).setOnQueryTextListener(MainActivity.this);
         return super.onCreateOptionsMenu(menu);
+    }
+
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        mSearchMenu.collapseActionView();
+        Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+        intent.putExtra("query", s);
+        startActivity(intent);
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        return false;
     }
 
     @Override
@@ -126,6 +146,5 @@ public class MainActivity extends AppCompatActivity implements HorizontalMovieCu
                 startActivity(intent);
                 break;
         }
-
     }
 }

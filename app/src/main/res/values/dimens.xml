@@ -6,7 +6,7 @@
     <dimen name="app_bar_height">180dp</dimen>
     <dimen name="text_margin">16dp</dimen>
     <dimen name="corner_radius">20dp</dimen>
-    <dimen name="card_elevation">2dp</dimen>
+    <dimen name="card_elevation">4dp</dimen>
     <dimen name="small_margin">4dp</dimen>
 
     <dimen name="default_margin_large">32dp</dimen>
@@ -17,7 +17,8 @@
     <dimen name="default_padding_medium">16dp</dimen>
     <dimen name="default_padding_small">8dp</dimen>
     <dimen name="text_large">28sp</dimen>
-    <dimen name="text_medium">14sp</dimen>
+    <dimen name="text_medium">20sp</dimen>
+    <dimen name="text_small">14sp</dimen>
 
     <dimen name="default_height_medium">48dp</dimen>
 </resources>

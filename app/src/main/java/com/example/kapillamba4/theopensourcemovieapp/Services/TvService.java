@@ -19,8 +19,9 @@ public interface TvService {
     @GET("tv/top_rated")
     Call<WrapperTvShow> getTopRatedTvShows(@Query("api_key") String apiKey, @Query("page") Integer page);
 
-    @GET("tv/upcoming")
-    Call<WrapperTvShow> getUpcomingTvShows(@Query("api_key") String apiKey, @Query("page") Integer page);
+    // TODO
+    @GET("tv/airing_today")
+    Call<WrapperTvShow> getAiringTvShows(@Query("api_key") String apiKey, @Query("page") Integer page);
 
     @GET("tv/{tv_id}")
     Call<DetailTv> getDetailTvShow(@Path("tv_id") String id, @Query("api_key") String apiKey);

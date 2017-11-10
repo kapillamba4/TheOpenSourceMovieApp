@@ -9,15 +9,17 @@ import java.util.List;
  * Created by kapil on 26/10/17.
  */
 
-// TODO
-
 public class DetailMovie {
+
     @SerializedName("adult")
     @Expose
     private Boolean adult;
     @SerializedName("backdrop_path")
     @Expose
     private String backdropPath;
+    @SerializedName("belongs_to_collection")
+    @Expose
+    private Object belongsToCollection;
     @SerializedName("budget")
     @Expose
     private Integer budget;
@@ -47,7 +49,7 @@ public class DetailMovie {
     private Double popularity;
     @SerializedName("poster_path")
     @Expose
-    private String posterPath;
+    private Object posterPath;
     @SerializedName("production_companies")
     @Expose
     private List<ProductionCompany> productionCompanies = null;
@@ -93,6 +95,14 @@ public class DetailMovie {
 
     public void setBackdropPath(String backdropPath) {
         this.backdropPath = backdropPath;
+    }
+
+    public Object getBelongsToCollection() {
+        return belongsToCollection;
+    }
+
+    public void setBelongsToCollection(Object belongsToCollection) {
+        this.belongsToCollection = belongsToCollection;
     }
 
     public Integer getBudget() {
@@ -167,12 +177,11 @@ public class DetailMovie {
         this.popularity = popularity;
     }
 
-    public String getPosterPath() {
+    public Object getPosterPath() {
         return posterPath;
-
     }
 
-    public void setPosterPath(String posterPath) {
+    public void setPosterPath(Object posterPath) {
         this.posterPath = posterPath;
     }
 

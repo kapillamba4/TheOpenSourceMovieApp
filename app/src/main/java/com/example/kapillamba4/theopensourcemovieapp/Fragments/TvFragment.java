@@ -33,7 +33,7 @@ public class TvFragment extends Fragment {
     NestedScrollView mNestedScrollView;
     ArrayList<TvShow> mPopularTvShows = new ArrayList<>();
     ArrayList<TvShow> mTopRatedTvShows = new ArrayList<>();
-    ArrayList<TvShow> mUpcomingTvShows = new ArrayList<>();
+    ArrayList<TvShow> mAiringTvShows = new ArrayList<>();
     Retrofit mBuilder;
 
     public TvFragment() {
@@ -73,14 +73,14 @@ public class TvFragment extends Fragment {
         SnapHelper mSnapHelper = new LinearSnapHelper();
         mSnapHelper.attachToRecyclerView(mRecyclerView);
         TvService tvService = mBuilder.create(TvService.class);
-        Call<WrapperTvShow> popularTvCall = tvService.getTopRatedTvShows(CONSTANTS.API_KEY, 1);
-        popularTvCall.enqueue(new Callback<WrapperTvShow>() {
+        Call<WrapperTvShow> topRatedTvCall = tvService.getTopRatedTvShows(CONSTANTS.API_KEY, 1);
+        topRatedTvCall.enqueue(new Callback<WrapperTvShow>() {
             @Override
             public void onResponse(Call<WrapperTvShow> call, Response<WrapperTvShow> response) {
                 mProgressBar.setVisibility(View.GONE);
                 mNestedScrollView.setVisibility(View.VISIBLE);
-                mPopularTvShows = new ArrayList<>(response.body().getResults());
-                HorizontalTvCustomAdapter mHorizontalTvCustomAdapter = new HorizontalTvCustomAdapter(getContext(), mPopularTvShows);
+                mTopRatedTvShows = new ArrayList<>(response.body().getResults());
+                HorizontalTvCustomAdapter mHorizontalTvCustomAdapter = new HorizontalTvCustomAdapter(getContext(), mTopRatedTvShows);
                 mHorizontalTvCustomAdapter.notifyDataSetChanged();
                 mRecyclerView.setAdapter(mHorizontalTvCustomAdapter);
             }
@@ -90,24 +90,23 @@ public class TvFragment extends Fragment {
                 t.printStackTrace();
             }
         });
-
     }
 
-    public void setupUpcomingTvShows(View view) {
-        final RecyclerView mRecyclerView = view.findViewById(R.id.tv_upcoming_recycler_view);
+    public void setupAiringTvShows(View view) {
+        final RecyclerView mRecyclerView = view.findViewById(R.id.tv_latest_recycler_view);
         LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         mRecyclerView.setLayoutManager(horizontalLayoutManager);
         SnapHelper mSnapHelper = new LinearSnapHelper();
         mSnapHelper.attachToRecyclerView(mRecyclerView);
         TvService tvService = mBuilder.create(TvService.class);
-        Call<WrapperTvShow> popularTvCall = tvService.getPopularTVShows(CONSTANTS.API_KEY, 1);
-        popularTvCall.enqueue(new Callback<WrapperTvShow>() {
+        Call<WrapperTvShow> airingTvCall = tvService.getAiringTvShows(CONSTANTS.API_KEY, 1);
+        airingTvCall.enqueue(new Callback<WrapperTvShow>() {
             @Override
             public void onResponse(Call<WrapperTvShow> call, Response<WrapperTvShow> response) {
                 mProgressBar.setVisibility(View.GONE);
                 mNestedScrollView.setVisibility(View.VISIBLE);
-                mUpcomingTvShows = new ArrayList<>(response.body().getResults());
-                HorizontalTvCustomAdapter mHorizontalTvCustomAdapter = new HorizontalTvCustomAdapter(getContext(), mUpcomingTvShows);
+                mAiringTvShows = new ArrayList<>(response.body().getResults());
+                HorizontalTvCustomAdapter mHorizontalTvCustomAdapter = new HorizontalTvCustomAdapter(getContext(), mAiringTvShows);
                 mHorizontalTvCustomAdapter.notifyDataSetChanged();
                 mRecyclerView.setAdapter(mHorizontalTvCustomAdapter);
             }
@@ -133,7 +132,7 @@ public class TvFragment extends Fragment {
 
         setupPopularTvShows(view);
         setupTopRatedTvShows(view);
-        setupUpcomingTvShows(view);
+        setupAiringTvShows(view);
 
         return view;
     }
