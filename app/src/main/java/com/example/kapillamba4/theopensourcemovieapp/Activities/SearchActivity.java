@@ -1,21 +1,19 @@
-package com.example.kapillamba4.theopensourcemovieapp;
+package com.example.kapillamba4.theopensourcemovieapp.Activities;
 
 import android.app.SearchManager;
 import android.content.Intent;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.SearchView;
-import android.widget.Toast;
 
 import com.example.kapillamba4.theopensourcemovieapp.Adapters.SearchDataAdapter;
 import com.example.kapillamba4.theopensourcemovieapp.Entities.MultiSearch;
 import com.example.kapillamba4.theopensourcemovieapp.Entities.SearchItem;
+import com.example.kapillamba4.theopensourcemovieapp.R;
 import com.example.kapillamba4.theopensourcemovieapp.Services.CommonService;
 import com.example.kapillamba4.theopensourcemovieapp.Utils.CONSTANTS;
 

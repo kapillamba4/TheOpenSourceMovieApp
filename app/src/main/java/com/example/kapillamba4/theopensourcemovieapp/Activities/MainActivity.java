@@ -1,7 +1,6 @@
-package com.example.kapillamba4.theopensourcemovieapp;
+package com.example.kapillamba4.theopensourcemovieapp.Activities;
 
 import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
@@ -21,10 +20,10 @@ import android.widget.Toast;
 
 import com.example.kapillamba4.theopensourcemovieapp.Adapters.HorizontalMovieCustomAdapter;
 import com.example.kapillamba4.theopensourcemovieapp.Adapters.HorizontalTvCustomAdapter;
-import com.example.kapillamba4.theopensourcemovieapp.Adapters.SearchDataAdapter;
 import com.example.kapillamba4.theopensourcemovieapp.Fragments.MovieFragment;
 import com.example.kapillamba4.theopensourcemovieapp.Fragments.TvFragment;
 import com.example.kapillamba4.theopensourcemovieapp.Network.NetworkChangeReceiver;
+import com.example.kapillamba4.theopensourcemovieapp.R;
 
 
 public class MainActivity extends AppCompatActivity implements HorizontalMovieCustomAdapter.onClickCustomListener, HorizontalTvCustomAdapter.onClickCustomListener, SearchView.OnQueryTextListener {

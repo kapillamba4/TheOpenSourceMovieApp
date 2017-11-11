@@ -34,11 +34,11 @@ public class MovieFragment extends Fragment  {
     private NestedScrollView mNestedScrollView;
     private ProgressBar mProgressBar;
     private ArrayList<Movie> mPopularMovies = new ArrayList<>();
-    private int mPopularMoviesPage = 0;
+    private int mPopularMoviesPage = 1;
     private ArrayList<Movie> mTopRatedMovies = new ArrayList<>();
-    private int mTopRatedMoviesPage = 0;
+    private int mTopRatedMoviesPage = 1;
     private ArrayList<Movie> mUpcomingMovies = new ArrayList<>();
-    private int mUpcomingMoviesPage = 0;
+    private int mUpcomingMoviesPage = 1;
 
     private Retrofit mBuilder;
     private boolean loading  = false;
@@ -72,6 +72,44 @@ public class MovieFragment extends Fragment  {
                 final HorizontalMovieCustomAdapter mHorizontalMovieCustomAdapter = new HorizontalMovieCustomAdapter(getContext(), mPopularMovies);
                 mHorizontalMovieCustomAdapter.notifyDataSetChanged();
                 mRecyclerView.setAdapter(mHorizontalMovieCustomAdapter);
+                mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                    @Override
+                    public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                        super.onScrollStateChanged(recyclerView, newState);
+                    }
+
+                    @Override
+                    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                        super.onScrolled(recyclerView, dx, dy);
+                        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+                        int visibleItemCount = 0, totalItemCount = 0, pastVisiblesItems = 0;
+                        if (dx > 0 && !loading) {
+                            visibleItemCount = recyclerView.getLayoutManager().getChildCount();
+                            totalItemCount = recyclerView.getLayoutManager().getItemCount();
+                            pastVisiblesItems = ((LinearLayoutManager)recyclerView.getLayoutManager()).findFirstVisibleItemPosition();
+                            if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+                                loading = true;
+                                Log.v("Scroll: ", "Last Item reached !");
+                                MovieService movieService = mBuilder.create(MovieService.class);
+                                Call<WrapperMovie> popularMovieCall = movieService.getPopularMovies(CONSTANTS.API_KEY, ++mPopularMoviesPage, "IN");
+                                popularMovieCall.enqueue(new Callback<WrapperMovie>() {
+                                    @Override
+                                    public void onResponse(Call<WrapperMovie> call, Response<WrapperMovie> response) {
+                                        mUpcomingMovies.addAll(response.body().getResults());
+                                        mHorizontalMovieCustomAdapter.notifyDataSetChanged();
+                                        loading = false;
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<WrapperMovie> call, Throwable t) {
+
+                                    }
+                                });
+                                //Do pagination.. i.e. fetch new data
+                            }
+                        }
+                    }
+                });
             }
 
             @Override
@@ -92,16 +130,54 @@ public class MovieFragment extends Fragment  {
         mSnapHelper.attachToRecyclerView(mRecyclerView);
 
         MovieService movieService = mBuilder.create(MovieService.class);
-        Call<WrapperMovie> popularMovieCall = movieService.getTopRatedMovies(CONSTANTS.API_KEY, 1, "IN");
-        popularMovieCall.enqueue(new Callback<WrapperMovie>() {
+        Call<WrapperMovie> topRatedMoviesCall = movieService.getTopRatedMovies(CONSTANTS.API_KEY, 1, "IN");
+        topRatedMoviesCall.enqueue(new Callback<WrapperMovie>() {
             @Override
             public void onResponse(Call<WrapperMovie> call, Response<WrapperMovie> response) {
                 mProgressBar.setVisibility(View.GONE);
                 mNestedScrollView.setVisibility(View.VISIBLE);
                 mTopRatedMovies = new ArrayList<>(response.body().getResults());
-                HorizontalMovieCustomAdapter mHorizontalMovieCustomAdapter = new HorizontalMovieCustomAdapter(getContext(), mTopRatedMovies);
+                final HorizontalMovieCustomAdapter mHorizontalMovieCustomAdapter = new HorizontalMovieCustomAdapter(getContext(), mTopRatedMovies);
                 mHorizontalMovieCustomAdapter.notifyDataSetChanged();
                 mRecyclerView.setAdapter(mHorizontalMovieCustomAdapter);
+                mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                    @Override
+                    public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                        super.onScrollStateChanged(recyclerView, newState);
+                    }
+
+                    @Override
+                    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                        super.onScrolled(recyclerView, dx, dy);
+                        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+                        int visibleItemCount = 0, totalItemCount = 0, pastVisiblesItems = 0;
+                        if (dx > 0 && !loading) {
+                            visibleItemCount = recyclerView.getLayoutManager().getChildCount();
+                            totalItemCount = recyclerView.getLayoutManager().getItemCount();
+                            pastVisiblesItems = ((LinearLayoutManager)recyclerView.getLayoutManager()).findFirstVisibleItemPosition();
+                            if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+                                loading = true;
+                                Log.v("Scroll: ", "Last Item reached !");
+                                MovieService movieService = mBuilder.create(MovieService.class);
+                                Call<WrapperMovie> popularMovieCall = movieService.getTopRatedMovies(CONSTANTS.API_KEY, ++mTopRatedMoviesPage, "IN");
+                                popularMovieCall.enqueue(new Callback<WrapperMovie>() {
+                                    @Override
+                                    public void onResponse(Call<WrapperMovie> call, Response<WrapperMovie> response) {
+                                        mTopRatedMovies.addAll(response.body().getResults());
+                                        mHorizontalMovieCustomAdapter.notifyDataSetChanged();
+                                        loading = false;
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<WrapperMovie> call, Throwable t) {
+
+                                    }
+                                });
+                                //Do pagination.. i.e. fetch new data
+                            }
+                        }
+                    }
+                });
             }
 
             @Override
@@ -122,8 +198,8 @@ public class MovieFragment extends Fragment  {
         mSnapHelper.attachToRecyclerView(mRecyclerView);
 
         MovieService movieService = mBuilder.create(MovieService.class);
-        Call<WrapperMovie> popularMovieCall = movieService.getUpcomingMovies(CONSTANTS.API_KEY, 1, "IN");
-        popularMovieCall.enqueue(new Callback<WrapperMovie>() {
+        Call<WrapperMovie> upcomingMovieCall = movieService.getUpcomingMovies(CONSTANTS.API_KEY, 1, "IN");
+        upcomingMovieCall.enqueue(new Callback<WrapperMovie>() {
             @Override
             public void onResponse(Call<WrapperMovie> call, Response<WrapperMovie> response) {
                 mProgressBar.setVisibility(View.GONE);
@@ -151,8 +227,8 @@ public class MovieFragment extends Fragment  {
                                 loading = true;
                                 Log.v("Scroll: ", "Last Item reached !");
                                 MovieService movieService = mBuilder.create(MovieService.class);
-                                Call<WrapperMovie> popularMovieCall = movieService.getUpcomingMovies(CONSTANTS.API_KEY, 2, "IN");
-                                popularMovieCall.enqueue(new Callback<WrapperMovie>() {
+                                Call<WrapperMovie> upcomingMovieCall = movieService.getUpcomingMovies(CONSTANTS.API_KEY, ++mUpcomingMoviesPage, "IN");
+                                upcomingMovieCall.enqueue(new Callback<WrapperMovie>() {
                                     @Override
                                     public void onResponse(Call<WrapperMovie> call, Response<WrapperMovie> response) {
                                         mUpcomingMovies.addAll(response.body().getResults());

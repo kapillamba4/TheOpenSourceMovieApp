@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SnapHelper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +16,10 @@ import android.widget.ProgressBar;
 
 import com.example.kapillamba4.theopensourcemovieapp.Adapters.HorizontalTvCustomAdapter;
 import com.example.kapillamba4.theopensourcemovieapp.Entities.TvShow;
+import com.example.kapillamba4.theopensourcemovieapp.Entities.WrapperMovie;
 import com.example.kapillamba4.theopensourcemovieapp.Entities.WrapperTvShow;
 import com.example.kapillamba4.theopensourcemovieapp.R;
+import com.example.kapillamba4.theopensourcemovieapp.Services.MovieService;
 import com.example.kapillamba4.theopensourcemovieapp.Services.TvService;
 import com.example.kapillamba4.theopensourcemovieapp.Utils.CONSTANTS;
 
@@ -32,11 +35,12 @@ public class TvFragment extends Fragment {
     private ProgressBar mProgressBar;
     private NestedScrollView mNestedScrollView;
     private ArrayList<TvShow> mPopularTvShows = new ArrayList<>();
-    private int mPopularTvShowsPage = 0;
+    private int mPopularTvShowsPage = 1;
     private ArrayList<TvShow> mTopRatedTvShows = new ArrayList<>();
-    private int mTopRatedTvShowsPage = 0;
+    private int mTopRatedTvShowsPage = 1;
     private ArrayList<TvShow> mAiringTvShows = new ArrayList<>();
-    private int mAiringTvShowsPage = 0;
+    private int mAiringTvShowsPage = 1;
+    private boolean loading = false;
 
     private Retrofit mBuilder;
 
@@ -58,9 +62,47 @@ public class TvFragment extends Fragment {
                 mProgressBar.setVisibility(View.GONE);
                 mNestedScrollView.setVisibility(View.VISIBLE);
                 mPopularTvShows = new ArrayList<>(response.body().getResults());
-                HorizontalTvCustomAdapter mHorizontalTvCustomAdapter = new HorizontalTvCustomAdapter(getContext(), mPopularTvShows);
+                final HorizontalTvCustomAdapter mHorizontalTvCustomAdapter = new HorizontalTvCustomAdapter(getContext(), mPopularTvShows);
                 mHorizontalTvCustomAdapter.notifyDataSetChanged();
                 mRecyclerView.setAdapter(mHorizontalTvCustomAdapter);
+                mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                    @Override
+                    public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                        super.onScrollStateChanged(recyclerView, newState);
+                    }
+
+                    @Override
+                    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                        super.onScrolled(recyclerView, dx, dy);
+                        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+                        int visibleItemCount = 0, totalItemCount = 0, pastVisiblesItems = 0;
+                        if (dx > 0 && !loading) {
+                            visibleItemCount = recyclerView.getLayoutManager().getChildCount();
+                            totalItemCount = recyclerView.getLayoutManager().getItemCount();
+                            pastVisiblesItems = ((LinearLayoutManager)recyclerView.getLayoutManager()).findFirstVisibleItemPosition();
+                            if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+                                loading = true;
+                                Log.v("Scroll: ", "Last Item reached !");
+                                TvService tvService  = mBuilder.create(TvService.class);
+                                Call<WrapperTvShow> popularTvCall = tvService.getPopularTVShows(CONSTANTS.API_KEY, ++mPopularTvShowsPage);
+                                popularTvCall.enqueue(new Callback<WrapperTvShow>() {
+                                    @Override
+                                    public void onResponse(Call<WrapperTvShow> call, Response<WrapperTvShow> response) {
+                                        mPopularTvShows.addAll(response.body().getResults());
+                                        mHorizontalTvCustomAdapter.notifyDataSetChanged();
+                                        loading = false;
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<WrapperTvShow> call, Throwable t) {
+
+                                    }
+                                });
+                                //Do pagination.. i.e. fetch new data
+                            }
+                        }
+                    }
+                });
             }
 
             @Override
@@ -84,9 +126,47 @@ public class TvFragment extends Fragment {
                 mProgressBar.setVisibility(View.GONE);
                 mNestedScrollView.setVisibility(View.VISIBLE);
                 mTopRatedTvShows = new ArrayList<>(response.body().getResults());
-                HorizontalTvCustomAdapter mHorizontalTvCustomAdapter = new HorizontalTvCustomAdapter(getContext(), mTopRatedTvShows);
+                final HorizontalTvCustomAdapter mHorizontalTvCustomAdapter = new HorizontalTvCustomAdapter(getContext(), mTopRatedTvShows);
                 mHorizontalTvCustomAdapter.notifyDataSetChanged();
                 mRecyclerView.setAdapter(mHorizontalTvCustomAdapter);
+                mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                    @Override
+                    public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                        super.onScrollStateChanged(recyclerView, newState);
+                    }
+
+                    @Override
+                    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                        super.onScrolled(recyclerView, dx, dy);
+                        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+                        int visibleItemCount = 0, totalItemCount = 0, pastVisiblesItems = 0;
+                        if (dx > 0 && !loading) {
+                            visibleItemCount = recyclerView.getLayoutManager().getChildCount();
+                            totalItemCount = recyclerView.getLayoutManager().getItemCount();
+                            pastVisiblesItems = ((LinearLayoutManager)recyclerView.getLayoutManager()).findFirstVisibleItemPosition();
+                            if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+                                loading = true;
+                                Log.v("Scroll: ", "Last Item reached !");
+                                TvService tvService  = mBuilder.create(TvService.class);
+                                Call<WrapperTvShow> topRatedTvCall = tvService.getTopRatedTvShows(CONSTANTS.API_KEY, ++mTopRatedTvShowsPage);
+                                topRatedTvCall.enqueue(new Callback<WrapperTvShow>() {
+                                    @Override
+                                    public void onResponse(Call<WrapperTvShow> call, Response<WrapperTvShow> response) {
+                                        mTopRatedTvShows.addAll(response.body().getResults());
+                                        mHorizontalTvCustomAdapter.notifyDataSetChanged();
+                                        loading = false;
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<WrapperTvShow> call, Throwable t) {
+
+                                    }
+                                });
+                                //Do pagination.. i.e. fetch new data
+                            }
+                        }
+                    }
+                });
             }
 
             @Override
@@ -110,9 +190,47 @@ public class TvFragment extends Fragment {
                 mProgressBar.setVisibility(View.GONE);
                 mNestedScrollView.setVisibility(View.VISIBLE);
                 mAiringTvShows = new ArrayList<>(response.body().getResults());
-                HorizontalTvCustomAdapter mHorizontalTvCustomAdapter = new HorizontalTvCustomAdapter(getContext(), mAiringTvShows);
+                final HorizontalTvCustomAdapter mHorizontalTvCustomAdapter = new HorizontalTvCustomAdapter(getContext(), mAiringTvShows);
                 mHorizontalTvCustomAdapter.notifyDataSetChanged();
                 mRecyclerView.setAdapter(mHorizontalTvCustomAdapter);
+                mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                    @Override
+                    public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                        super.onScrollStateChanged(recyclerView, newState);
+                    }
+
+                    @Override
+                    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                        super.onScrolled(recyclerView, dx, dy);
+                        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+                        int visibleItemCount = 0, totalItemCount = 0, pastVisiblesItems = 0;
+                        if (dx > 0 && !loading) {
+                            visibleItemCount = recyclerView.getLayoutManager().getChildCount();
+                            totalItemCount = recyclerView.getLayoutManager().getItemCount();
+                            pastVisiblesItems = ((LinearLayoutManager)recyclerView.getLayoutManager()).findFirstVisibleItemPosition();
+                            if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+                                loading = true;
+                                Log.v("Scroll: ", "Last Item reached !");
+                                TvService tvService  = mBuilder.create(TvService.class);
+                                Call<WrapperTvShow> airingTvCall = tvService.getAiringTvShows(CONSTANTS.API_KEY, ++mAiringTvShowsPage);
+                                airingTvCall.enqueue(new Callback<WrapperTvShow>() {
+                                    @Override
+                                    public void onResponse(Call<WrapperTvShow> call, Response<WrapperTvShow> response) {
+                                        mAiringTvShows.addAll(response.body().getResults());
+                                        mHorizontalTvCustomAdapter.notifyDataSetChanged();
+                                        loading = false;
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<WrapperTvShow> call, Throwable t) {
+
+                                    }
+                                });
+                                //Do pagination.. i.e. fetch new data
+                            }
+                        }
+                    }
+                });
             }
 
             @Override

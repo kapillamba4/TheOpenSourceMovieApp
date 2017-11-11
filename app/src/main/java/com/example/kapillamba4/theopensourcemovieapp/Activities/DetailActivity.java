@@ -1,4 +1,4 @@
-package com.example.kapillamba4.theopensourcemovieapp;
+package com.example.kapillamba4.theopensourcemovieapp.Activities;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -25,6 +25,7 @@ import com.example.kapillamba4.theopensourcemovieapp.Entities.ResourceVideo;
 import com.example.kapillamba4.theopensourcemovieapp.Entities.WrapperCast;
 import com.example.kapillamba4.theopensourcemovieapp.Entities.WrapperImage;
 import com.example.kapillamba4.theopensourcemovieapp.Entities.WrapperVideo;
+import com.example.kapillamba4.theopensourcemovieapp.R;
 import com.example.kapillamba4.theopensourcemovieapp.Services.CommonService;
 import com.example.kapillamba4.theopensourcemovieapp.Services.MovieService;
 import com.example.kapillamba4.theopensourcemovieapp.Services.TvService;
@@ -84,7 +85,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
         switch (type) {
             case "tv":
-                final TvService tvService = mBuilder.create(TvService.class);
+                TvService tvService = mBuilder.create(TvService.class);
                 Call<DetailTv> detailTvCall = tvService.getDetailTvShow(id, CONSTANTS.API_KEY);
                 detailTvCall.enqueue(new Callback<DetailTv>() {
                     @Override
@@ -115,11 +116,6 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                                     posterUrls.add(image.getFilePath());
                                 }
 
-//                                mImages = new ArrayList<>(response.body().getBackdrops());
-//                                for(ResourceImage image: mImages) {
-//                                    urls.add(image.getFilePath());
-//                                }
-//
                                 mBackdrops = new ArrayList<>(response.body().getBackdrops());
                                 for(ResourceImage image: mBackdrops) {
                                     backdropUrls.add(image.getFilePath());
@@ -209,6 +205,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
             case "movie":
                 MovieService movieService = mBuilder.create(MovieService.class);
                 Call<DetailMovie> detailMovieCall = movieService.getDetailMovie(id, CONSTANTS.API_KEY);
+
                 detailMovieCall.enqueue(new Callback<DetailMovie>() {
                     @Override
                     public void onResponse(Call<DetailMovie> call, Response<DetailMovie> response) {
@@ -223,10 +220,96 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                             mGenre.setText(mGenre.getText() + genre + " | ");
                         }
 
+                        CommonService commonService = mBuilder.create(CommonService.class);
+                        Call<WrapperImage> wrapperImageCall = commonService.getImages(type, mDetailMovie.getId().toString(), CONSTANTS.API_KEY);
+                        Call<WrapperVideo> wrapperVideoCall = commonService.getVideos(type, mDetailMovie.getId().toString(), CONSTANTS.API_KEY);
+                        Call<WrapperCast> wrapperCastCall = commonService.getCastMovie(type, mDetailMovie.getId().toString(), CONSTANTS.API_KEY);
+
+                        wrapperImageCall.enqueue(new Callback<WrapperImage>() {
+                            @Override
+                            public void onResponse(Call<WrapperImage> call, Response<WrapperImage> response) {
+                                mPosters = new ArrayList<>(response.body().getPosters());
+                                ArrayList<String> posterUrls = new ArrayList<>();
+                                ArrayList<String> backdropUrls = new ArrayList<>();
+                                for(ResourceImage image: mPosters) {
+                                    posterUrls.add(image.getFilePath());
+                                }
+
+                                mBackdrops = new ArrayList<>(response.body().getBackdrops());
+                                for(ResourceImage image: mBackdrops) {
+                                    backdropUrls.add(image.getFilePath());
+                                }
+
+                                ImageAdapter posterAdapter = new ImageAdapter(DetailActivity.this, posterUrls, R.layout.image, CONSTANTS.BASE_POSTER_URL_SMALL);
+                                ImageAdapter backdropAdapter = new ImageAdapter(DetailActivity.this, backdropUrls, R.layout.image, CONSTANTS.BASE_POSTER_URL_MEDIUM);
+                                RecyclerView posterRecyclerView = findViewById(R.id.posters);
+                                RecyclerView backdropRecyclerView = findViewById(R.id.backdrops);
+                                posterRecyclerView.setAdapter(posterAdapter);
+                                backdropRecyclerView.setAdapter(backdropAdapter);
+
+                                LinearLayoutManager horizontalLayoutManager;
+
+                                horizontalLayoutManager = new LinearLayoutManager(DetailActivity.this, LinearLayoutManager.HORIZONTAL, false);
+                                horizontalLayoutManager.canScrollHorizontally();
+                                posterRecyclerView.setLayoutManager(horizontalLayoutManager);
+
+                                horizontalLayoutManager = new LinearLayoutManager(DetailActivity.this, LinearLayoutManager.HORIZONTAL, false);
+                                horizontalLayoutManager.canScrollHorizontally();
+                                backdropRecyclerView.setLayoutManager(horizontalLayoutManager);
+
+                                posterAdapter.notifyDataSetChanged();
+                                backdropAdapter.notifyDataSetChanged();
+                            }
+
+                            @Override
+                            public void onFailure(Call<WrapperImage> call, Throwable t) {
+
+                            }
+                        });
+
+
+                        wrapperVideoCall.enqueue(new Callback<WrapperVideo>() {
+                            @Override
+                            public void onResponse(Call<WrapperVideo> call, Response<WrapperVideo> response) {
+
+                            }
+
+                            @Override
+                            public void onFailure(Call<WrapperVideo> call, Throwable t) {
+
+                            }
+                        });
+
                         mTitle.setText(mDetailMovie.getTitle());
                         mOverview.setText(mDetailMovie.getOverview());
                         mStatus.setText(mDetailMovie.getStatus());
-                        mReleaseDate.setText(mDetailMovie.getReleaseDate());
+                        mReleaseDate.setText(" " + mDetailMovie.getReleaseDate());
+                        wrapperCastCall.enqueue(new Callback<WrapperCast>() {
+                            @Override
+                            public void onResponse(Call<WrapperCast> call, Response<WrapperCast> response) {
+                                mCast = new ArrayList<>(response.body().getCast());
+                                ArrayList<String> mCastUrls = new ArrayList<>();
+                                for(Cast cast: mCast) {
+                                    mCastUrls.add(cast.getProfilePath());
+                                }
+
+                                ImageAdapter imageAdapter = new ImageAdapter(DetailActivity.this, mCastUrls, R.layout.cast, CONSTANTS.BASE_POSTER_URL_SMALL);
+                                RecyclerView recyclerView = findViewById(R.id.cast);
+                                recyclerView.setAdapter(imageAdapter);
+                                LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(DetailActivity.this, LinearLayoutManager.HORIZONTAL, false);
+                                horizontalLayoutManager.canScrollHorizontally();
+
+                                recyclerView.setLayoutManager(horizontalLayoutManager);
+                                imageAdapter.notifyDataSetChanged();
+                            }
+
+                            @Override
+                            public void onFailure(Call<WrapperCast> call, Throwable t) {
+
+                            }
+                        });
+
+
 //                      mProgressBar.setVisibility(View.GONE);
                     }
 

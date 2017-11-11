@@ -11,33 +11,33 @@ import java.util.List;
 
 public class DetailMovie {
 
-    @SerializedName("adult")
-    @Expose
-    private Boolean adult;
+//    @SerializedName("adult")
+//    @Expose
+//    private Boolean adult;
     @SerializedName("backdrop_path")
     @Expose
     private String backdropPath;
-    @SerializedName("belongs_to_collection")
-    @Expose
-    private Object belongsToCollection;
+//    @SerializedName("belongs_to_collection")
+//    @Expose
+//    private Object belongsToCollection;
     @SerializedName("budget")
     @Expose
     private Integer budget;
     @SerializedName("genres")
     @Expose
     private List<Genre> genres = null;
-    @SerializedName("homepage")
-    @Expose
-    private String homepage;
+//    @SerializedName("homepage")
+//    @Expose
+//    private String homepage;
     @SerializedName("id")
     @Expose
     private Integer id;
     @SerializedName("imdb_id")
     @Expose
     private String imdbId;
-    @SerializedName("original_language")
-    @Expose
-    private String originalLanguage;
+//    @SerializedName("original_language")
+//    @Expose
+//    private String originalLanguage;
     @SerializedName("original_title")
     @Expose
     private String originalTitle;
@@ -65,29 +65,29 @@ public class DetailMovie {
     @SerializedName("status")
     @Expose
     private String status;
-    @SerializedName("tagline")
-    @Expose
-    private String tagline;
+//    @SerializedName("tagline")
+//    @Expose
+//    private String tagline;
     @SerializedName("title")
     @Expose
     private String title;
     @SerializedName("video")
     @Expose
     private Boolean video;
-    @SerializedName("vote_average")
-    @Expose
-    private Double voteAverage;
-    @SerializedName("vote_count")
-    @Expose
-    private Integer voteCount;
+//    @SerializedName("vote_average")
+//    @Expose
+//    private Double voteAverage;
+//    @SerializedName("vote_count")
+//    @Expose
+//    private Integer voteCount;
 
-    public Boolean getAdult() {
-        return adult;
-    }
-
-    public void setAdult(Boolean adult) {
-        this.adult = adult;
-    }
+//    public Boolean getAdult() {
+//        return adult;
+//    }
+//
+//    public void setAdult(Boolean adult) {
+//        this.adult = adult;
+//    }
 
     public String getBackdropPath() {
         return backdropPath;
@@ -97,13 +97,13 @@ public class DetailMovie {
         this.backdropPath = backdropPath;
     }
 
-    public Object getBelongsToCollection() {
-        return belongsToCollection;
-    }
-
-    public void setBelongsToCollection(Object belongsToCollection) {
-        this.belongsToCollection = belongsToCollection;
-    }
+//    public Object getBelongsToCollection() {
+//        return belongsToCollection;
+//    }
+//
+//    public void setBelongsToCollection(Object belongsToCollection) {
+//        this.belongsToCollection = belongsToCollection;
+//    }
 
     public Integer getBudget() {
         return budget;
@@ -121,13 +121,13 @@ public class DetailMovie {
         this.genres = genres;
     }
 
-    public String getHomepage() {
-        return homepage;
-    }
-
-    public void setHomepage(String homepage) {
-        this.homepage = homepage;
-    }
+//    public String getHomepage() {
+//        return homepage;
+//    }
+//
+//    public void setHomepage(String homepage) {
+//        this.homepage = homepage;
+//    }
 
     public Integer getId() {
         return id;
@@ -145,13 +145,13 @@ public class DetailMovie {
         this.imdbId = imdbId;
     }
 
-    public String getOriginalLanguage() {
-        return originalLanguage;
-    }
-
-    public void setOriginalLanguage(String originalLanguage) {
-        this.originalLanguage = originalLanguage;
-    }
+//    public String getOriginalLanguage() {
+//        return originalLanguage;
+//    }
+//
+//    public void setOriginalLanguage(String originalLanguage) {
+//        this.originalLanguage = originalLanguage;
+//    }
 
     public String getOriginalTitle() {
         return originalTitle;
@@ -225,13 +225,13 @@ public class DetailMovie {
         this.status = status;
     }
 
-    public String getTagline() {
-        return tagline;
-    }
-
-    public void setTagline(String tagline) {
-        this.tagline = tagline;
-    }
+//    public String getTagline() {
+//        return tagline;
+//    }
+//
+//    public void setTagline(String tagline) {
+//        this.tagline = tagline;
+//    }
 
     public String getTitle() {
         return title;
@@ -249,19 +249,19 @@ public class DetailMovie {
         this.video = video;
     }
 
-    public Double getVoteAverage() {
-        return voteAverage;
-    }
-
-    public void setVoteAverage(Double voteAverage) {
-        this.voteAverage = voteAverage;
-    }
-
-    public Integer getVoteCount() {
-        return voteCount;
-    }
-
-    public void setVoteCount(Integer voteCount) {
-        this.voteCount = voteCount;
-    }
+//    public Double getVoteAverage() {
+//        return voteAverage;
+//    }
+//
+//    public void setVoteAverage(Double voteAverage) {
+//        this.voteAverage = voteAverage;
+//    }
+//
+//    public Integer getVoteCount() {
+//        return voteCount;
+//    }
+//
+//    public void setVoteCount(Integer voteCount) {
+//        this.voteCount = voteCount;
+//    }
 }
