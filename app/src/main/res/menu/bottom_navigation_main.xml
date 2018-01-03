@@ -16,7 +16,7 @@
     <item android:id="@+id/menu_personal_favourites"
         android:enabled="true"
         android:icon="@drawable/ic_favorite"
-        android:title="Personal"
+        android:title="PERSONAL"
         app:showAsAction="always" />
 
 </menu>

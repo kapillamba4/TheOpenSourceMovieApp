@@ -2,6 +2,7 @@ package com.example.kapillamba4.theopensourcemovieapp.Fragments;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.NestedScrollView;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import com.example.kapillamba4.theopensourcemovieapp.Activities.VerticalMovieListActivity;
 import com.example.kapillamba4.theopensourcemovieapp.Adapters.HorizontalMovieCustomAdapter;
 import com.example.kapillamba4.theopensourcemovieapp.Entities.Movie;
 import com.example.kapillamba4.theopensourcemovieapp.Entities.WrapperMovie;
@@ -30,7 +32,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MovieFragment extends Fragment  {
+public class MovieFragment extends Fragment {
     private NestedScrollView mNestedScrollView;
     private ProgressBar mProgressBar;
     private ArrayList<Movie> mPopularMovies = new ArrayList<>();
@@ -62,7 +64,7 @@ public class MovieFragment extends Fragment  {
         mSnapHelper.attachToRecyclerView(mRecyclerView);
 
         MovieService movieService = mBuilder.create(MovieService.class);
-        Call<WrapperMovie> popularMovieCall = movieService.getPopularMovies(CONSTANTS.API_KEY, 1, "IN");
+        Call<WrapperMovie> popularMovieCall = movieService.getPopularMovies(CONSTANTS.MOVIE_DB_API_KEY, 1);
         popularMovieCall.enqueue(new Callback<WrapperMovie>() {
             @Override
             public void onResponse(Call<WrapperMovie> call, Response<WrapperMovie> response) {
@@ -91,11 +93,11 @@ public class MovieFragment extends Fragment  {
                                 loading = true;
                                 Log.v("Scroll: ", "Last Item reached !");
                                 MovieService movieService = mBuilder.create(MovieService.class);
-                                Call<WrapperMovie> popularMovieCall = movieService.getPopularMovies(CONSTANTS.API_KEY, ++mPopularMoviesPage, "IN");
+                                Call<WrapperMovie> popularMovieCall = movieService.getPopularMovies(CONSTANTS.MOVIE_DB_API_KEY, ++mPopularMoviesPage);
                                 popularMovieCall.enqueue(new Callback<WrapperMovie>() {
                                     @Override
                                     public void onResponse(Call<WrapperMovie> call, Response<WrapperMovie> response) {
-                                        mUpcomingMovies.addAll(response.body().getResults());
+                                        mPopularMovies.addAll(response.body().getResults());
                                         mHorizontalMovieCustomAdapter.notifyDataSetChanged();
                                         loading = false;
                                     }
@@ -130,7 +132,7 @@ public class MovieFragment extends Fragment  {
         mSnapHelper.attachToRecyclerView(mRecyclerView);
 
         MovieService movieService = mBuilder.create(MovieService.class);
-        Call<WrapperMovie> topRatedMoviesCall = movieService.getTopRatedMovies(CONSTANTS.API_KEY, 1, "IN");
+        Call<WrapperMovie> topRatedMoviesCall = movieService.getTopRatedMovies(CONSTANTS.MOVIE_DB_API_KEY, 1);
         topRatedMoviesCall.enqueue(new Callback<WrapperMovie>() {
             @Override
             public void onResponse(Call<WrapperMovie> call, Response<WrapperMovie> response) {
@@ -159,7 +161,7 @@ public class MovieFragment extends Fragment  {
                                 loading = true;
                                 Log.v("Scroll: ", "Last Item reached !");
                                 MovieService movieService = mBuilder.create(MovieService.class);
-                                Call<WrapperMovie> popularMovieCall = movieService.getTopRatedMovies(CONSTANTS.API_KEY, ++mTopRatedMoviesPage, "IN");
+                                Call<WrapperMovie> popularMovieCall = movieService.getTopRatedMovies(CONSTANTS.MOVIE_DB_API_KEY, ++mTopRatedMoviesPage);
                                 popularMovieCall.enqueue(new Callback<WrapperMovie>() {
                                     @Override
                                     public void onResponse(Call<WrapperMovie> call, Response<WrapperMovie> response) {
@@ -198,7 +200,7 @@ public class MovieFragment extends Fragment  {
         mSnapHelper.attachToRecyclerView(mRecyclerView);
 
         MovieService movieService = mBuilder.create(MovieService.class);
-        Call<WrapperMovie> upcomingMovieCall = movieService.getUpcomingMovies(CONSTANTS.API_KEY, 1, "IN");
+        Call<WrapperMovie> upcomingMovieCall = movieService.getUpcomingMovies(CONSTANTS.MOVIE_DB_API_KEY, 1);
         upcomingMovieCall.enqueue(new Callback<WrapperMovie>() {
             @Override
             public void onResponse(Call<WrapperMovie> call, Response<WrapperMovie> response) {
@@ -227,7 +229,7 @@ public class MovieFragment extends Fragment  {
                                 loading = true;
                                 Log.v("Scroll: ", "Last Item reached !");
                                 MovieService movieService = mBuilder.create(MovieService.class);
-                                Call<WrapperMovie> upcomingMovieCall = movieService.getUpcomingMovies(CONSTANTS.API_KEY, ++mUpcomingMoviesPage, "IN");
+                                Call<WrapperMovie> upcomingMovieCall = movieService.getUpcomingMovies(CONSTANTS.MOVIE_DB_API_KEY, ++mUpcomingMoviesPage);
                                 upcomingMovieCall.enqueue(new Callback<WrapperMovie>() {
                                     @Override
                                     public void onResponse(Call<WrapperMovie> call, Response<WrapperMovie> response) {

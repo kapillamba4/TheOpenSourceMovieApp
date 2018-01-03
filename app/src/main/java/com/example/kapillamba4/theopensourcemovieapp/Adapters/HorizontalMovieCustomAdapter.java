@@ -57,7 +57,7 @@ public class HorizontalMovieCustomAdapter extends RecyclerView.Adapter<Horizonta
         holder.mTitle.setText(mMovie.getTitle());
         holder.mRating.setText(String.valueOf(mMovie.getVoteAverage()));
         holder.id = String.valueOf(mMovie.getId());
-        Picasso.with(mContext).load(CONSTANTS.BASE_POSTER_URL_SMALL + mMovie.getPosterPath()).into(holder.mImageView);
+        Picasso.with(mContext).load(CONSTANTS.BASE_POSTER_URL_SMALL + mMovie.getPosterPath()).resize(CONSTANTS.BASE_POSTER_WIDTH_SMALL, CONSTANTS.BASE_POSTER_HEIGHT_SMALL).into(holder.mImageView);
     }
 
     @Override

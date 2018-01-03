@@ -8,9 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+//import com.bumptech.glide.Glide;
+import com.example.kapillamba4.theopensourcemovieapp.Entities.Movie;
 import com.example.kapillamba4.theopensourcemovieapp.Entities.TvShow;
 import com.example.kapillamba4.theopensourcemovieapp.R;
+import com.example.kapillamba4.theopensourcemovieapp.Utils.CONSTANTS;
 import com.squareup.picasso.Picasso;
+
 
 import java.util.ArrayList;
 
@@ -19,40 +24,40 @@ import java.util.ArrayList;
  */
 
 public class VerticalTvCustomAdapter extends RecyclerView.Adapter<VerticalTvCustomAdapter.TvViewHolder> {
-
-    private ArrayList<TvShow> mTvShow;
+    private ArrayList<TvShow> mTvShows;
     private Context mContext;
 
     public VerticalTvCustomAdapter(Context context, ArrayList<TvShow> tvShows) {
         mContext = context;
-        mTvShow = tvShows;
+        mTvShows = tvShows;
     }
 
     @Override
-    public VerticalTvCustomAdapter.TvViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.tv_card_vertical_list, parent, false);
-        return new TvViewHolder(view);
+    public TvViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(mContext).inflate(R.layout.movie_vertical_card_layout, parent, false);
+        return new VerticalTvCustomAdapter.TvViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(VerticalTvCustomAdapter.TvViewHolder holder, int position) {
-        TvShow mtvItem = mTvShow.get(position);
-        holder.mTitle.setText(mtvItem.getName());
-//        holder.mRating.setText(String.valueOf(mtvItem.getVoteAverage()));
-        Picasso.with(mContext).load("https://image.tmdb.org/t/p/w185" + mtvItem.getPosterPath()).into(holder.mImageView);
-        holder.mOverview.setText(mtvItem.getOverview());
-        holder.mReleaseDate.setText(mtvItem.getFirstAirDate());
+        TvShow mTv = mTvShows.get(position);
+        holder.mTitle.setText(mTv.getName());
+//      holder.mRating.setText(String.valueOf(mtvItem.getVoteAverage()));
+
+        Picasso.with(mContext).load(CONSTANTS.BASE_POSTER_URL_SMALL + mTv.getPosterPath()).resize(CONSTANTS.BASE_POSTER_WIDTH_SMALL, CONSTANTS.BASE_POSTER_HEIGHT_SMALL).into(holder.mImageView);
+        holder.mOverview.setText(mTv.getOverview());
+        holder.mReleaseDate.setText(mTv.getFirstAirDate());
     }
 
     @Override
     public int getItemCount() {
-        return mTvShow.size();
+        return mTvShows.size();
     }
 
     static class TvViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView mImageView;
         TextView mTitle;
-        TextView mRating;
+        // TextView mRating;
         TextView mOverview;
         TextView mReleaseDate;
         View mItemView;
@@ -60,10 +65,10 @@ public class VerticalTvCustomAdapter extends RecyclerView.Adapter<VerticalTvCust
         public TvViewHolder(View itemView) {
             super(itemView);
             mItemView = itemView;
-            mImageView = itemView.findViewById(R.id.tv_vertical_card_thumbnail);
-            mTitle = itemView.findViewById(R.id.tv_vertical_card_title);
-            mOverview = itemView.findViewById(R.id.tv_vertical_card_overview);
-            mReleaseDate = itemView.findViewById(R.id.tv_vertical_card_release);
+            mImageView = itemView.findViewById(R.id.movie_vertical_card_thumbnail);
+            mTitle = itemView.findViewById(R.id.movie_vertical_card_title);
+            mOverview = itemView.findViewById(R.id.movie_vertical_card_overview);
+            mReleaseDate = itemView.findViewById(R.id.movie_vertical_card_release);
         }
 
         @Override

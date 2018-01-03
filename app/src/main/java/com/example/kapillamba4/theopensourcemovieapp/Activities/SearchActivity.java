@@ -25,7 +25,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class SearchActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
+public class SearchActivity extends AppCompatActivity implements SearchView.OnQueryTextListener, SearchDataAdapter.onClickCustomListener {
 
     private MenuItem mSearchMenu;
     private Retrofit mBuilder;
@@ -54,7 +54,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
 
     private void handleIntent(Intent intent) {
         CommonService commonService = mBuilder.create(CommonService.class);
-        Call<MultiSearch> multiSearchCall = commonService.getSearchResult(CONSTANTS.API_KEY, intent.getStringExtra(SearchManager.QUERY), "1");
+        Call<MultiSearch> multiSearchCall = commonService.getSearchResult(CONSTANTS.MOVIE_DB_API_KEY, intent.getStringExtra(SearchManager.QUERY), "1");
         LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         verticalLayoutManager.canScrollVertically();
 
@@ -97,4 +97,22 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
         return false;
     }
 
+    @Override
+    public void onItemClick(String id, String type) {
+        Intent intent;
+        switch (type) {
+            case "tv":
+                intent = new Intent(this, DetailActivity.class);
+                intent.putExtra("id", id);
+                intent.putExtra("type", type);
+                startActivity(intent);
+                break;
+            case "movie":
+                intent = new Intent(this, DetailActivity.class);
+                intent.putExtra("id", id);
+                intent.putExtra("type", type);
+                startActivity(intent);
+                break;
+        }
+    }
 }

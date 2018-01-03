@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.kapillamba4.theopensourcemovieapp.Fragments.SearchActivity">
+    tools:context="com.example.kapillamba4.theopensourcemovieapp.Activities.VerticalMovieListActivity">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/search_recycler_view"
+        android:id="@+id/movie_vertical_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/small_margin" />

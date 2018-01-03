@@ -14,15 +14,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <FrameLayout
                 android:id="@+id/movie_popular_banner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/default_margin_small"
-                android:paddingBottom="@dimen/default_padding_small"
-                android:paddingLeft="@dimen/default_padding_medium"
-                android:paddingRight="@dimen/default_padding_medium"
-                android:paddingTop="@dimen/default_padding_small">
+                android:padding="@dimen/default_padding_small">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -30,7 +27,7 @@
                     android:layout_gravity="left"
                     android:text="Popular Now"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/text_medium"/>
+                    android:textSize="@dimen/text_medium" />
 
                 <TextView
                     android:id="@+id/tv_popular_more"
@@ -38,16 +35,17 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right|center_vertical"
                     android:clickable="true"
+                    android:onClick="onClick"
                     android:text="More"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/text_small"/>
+                    android:textSize="@dimen/text_small" />
             </FrameLayout>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/tv_popular_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:nestedScrollingEnabled="false"/>
+                android:nestedScrollingEnabled="false" />
 
             <FrameLayout
                 android:id="@+id/tv_top_rated_banner"
@@ -65,7 +63,7 @@
                     android:layout_gravity="left"
                     android:text="Top Rated"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/text_medium"/>
+                    android:textSize="@dimen/text_medium" />
 
                 <TextView
                     android:id="@+id/tv_top_rated_more"
@@ -73,26 +71,23 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right|center_vertical"
                     android:clickable="true"
+                    android:onClick="onClick"
                     android:text="More"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/text_small"/>
+                    android:textSize="@dimen/text_small" />
             </FrameLayout>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/tv_top_rated_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:nestedScrollingEnabled="false"/>
+                android:nestedScrollingEnabled="false" />
 
             <FrameLayout
                 android:id="@+id/movie_latest_banner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/default_margin_small"
-                android:paddingBottom="@dimen/default_padding_small"
-                android:paddingLeft="@dimen/default_padding_medium"
-                android:paddingRight="@dimen/default_padding_medium"
-                android:paddingTop="@dimen/default_padding_small">
+                android:padding="@dimen/default_padding_small">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -100,24 +95,25 @@
                     android:layout_gravity="left"
                     android:text="Upcoming"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/text_medium"/>
+                    android:textSize="@dimen/text_medium" />
 
                 <TextView
-                    android:id="@+id/tv_latest_more"
+                    android:id="@+id/tv_upcoming_more"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right|center_vertical"
                     android:clickable="true"
+                    android:onClick="onClick"
                     android:text="More"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/text_small"/>
+                    android:textSize="@dimen/text_small" />
             </FrameLayout>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/tv_latest_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:nestedScrollingEnabled="false"/>
+                android:nestedScrollingEnabled="false" />
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 

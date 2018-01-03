@@ -8,9 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+//import com.bumptech.glide.Glide;
 import com.example.kapillamba4.theopensourcemovieapp.Entities.Movie;
 import com.example.kapillamba4.theopensourcemovieapp.R;
+import com.example.kapillamba4.theopensourcemovieapp.Utils.CONSTANTS;
 import com.squareup.picasso.Picasso;
+
 
 import java.util.ArrayList;
 
@@ -19,7 +23,6 @@ import java.util.ArrayList;
  */
 
 public class VerticalMovieCustomAdapter extends RecyclerView.Adapter<VerticalMovieCustomAdapter.MovieViewHolder> {
-
     private ArrayList<Movie> mMovies;
     private Context mContext;
 
@@ -30,7 +33,7 @@ public class VerticalMovieCustomAdapter extends RecyclerView.Adapter<VerticalMov
 
     @Override
     public MovieViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.movie_card_vertical_list, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.movie_vertical_card_layout, parent, false);
         return new VerticalMovieCustomAdapter.MovieViewHolder(view);
     }
 
@@ -38,8 +41,9 @@ public class VerticalMovieCustomAdapter extends RecyclerView.Adapter<VerticalMov
     public void onBindViewHolder(VerticalMovieCustomAdapter.MovieViewHolder holder, int position) {
         Movie mMovie = mMovies.get(position);
         holder.mTitle.setText(mMovie.getTitle());
-//        holder.mRating.setText(String.valueOf(mtvItem.getVoteAverage()));
-        Picasso.with(mContext).load("https://image.tmdb.org/t/p/w185" + mMovie.getPosterPath()).into(holder.mImageView);
+//      holder.mRating.setText(String.valueOf(mtvItem.getVoteAverage()));
+
+        Picasso.with(mContext).load(CONSTANTS.BASE_POSTER_URL_SMALL + mMovie.getPosterPath()).resize(CONSTANTS.BASE_POSTER_WIDTH_SMALL, CONSTANTS.BASE_POSTER_HEIGHT_SMALL).into(holder.mImageView);
         holder.mOverview.setText(mMovie.getOverview());
         holder.mReleaseDate.setText(mMovie.getReleaseDate());
     }

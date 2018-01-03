@@ -14,6 +14,7 @@ import com.example.kapillamba4.theopensourcemovieapp.R;
 import com.example.kapillamba4.theopensourcemovieapp.Utils.CONSTANTS;
 import com.squareup.picasso.Picasso;
 
+
 import java.util.ArrayList;
 
 /**
@@ -21,13 +22,13 @@ import java.util.ArrayList;
  */
 
 public class HorizontalTvCustomAdapter extends RecyclerView.Adapter<HorizontalTvCustomAdapter.TvViewHolder> {
-    private ArrayList<TvShow> mTvShow;
+    private ArrayList<TvShow> mTvShows;
     private Context mContext;
     private onClickCustomListener mOnItemClickListener;
 
     public HorizontalTvCustomAdapter(Context context, ArrayList<TvShow> tvShows) {
         mContext = context;
-        mTvShow = tvShows;
+        mTvShows = tvShows;
         try {
             mOnItemClickListener = (onClickCustomListener) context;
         } catch (ClassCastException e) {
@@ -52,16 +53,16 @@ public class HorizontalTvCustomAdapter extends RecyclerView.Adapter<HorizontalTv
 
     @Override
     public void onBindViewHolder(TvViewHolder holder, int position) {
-        TvShow mtvItem = mTvShow.get(position);
+        TvShow mtvItem = mTvShows.get(position);
         holder.mTitle.setText(mtvItem.getName());
         holder.mRating.setText(String.valueOf(mtvItem.getVoteAverage()));
         holder.id = String.valueOf(mtvItem.getId());
-        Picasso.with(mContext).load(CONSTANTS.BASE_POSTER_URL_SMALL + mtvItem.getPosterPath()).into(holder.mImageView);
+        Picasso.with(mContext).load(CONSTANTS.BASE_POSTER_URL_SMALL + mtvItem.getPosterPath()).resize(CONSTANTS.BASE_POSTER_WIDTH_SMALL, CONSTANTS.BASE_POSTER_HEIGHT_SMALL).into(holder.mImageView);
     }
 
     @Override
     public int getItemCount() {
-        return mTvShow.size();
+        return mTvShows.size();
     }
 
     public interface onClickCustomListener {

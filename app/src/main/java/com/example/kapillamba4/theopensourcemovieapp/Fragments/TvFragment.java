@@ -16,10 +16,8 @@ import android.widget.ProgressBar;
 
 import com.example.kapillamba4.theopensourcemovieapp.Adapters.HorizontalTvCustomAdapter;
 import com.example.kapillamba4.theopensourcemovieapp.Entities.TvShow;
-import com.example.kapillamba4.theopensourcemovieapp.Entities.WrapperMovie;
 import com.example.kapillamba4.theopensourcemovieapp.Entities.WrapperTvShow;
 import com.example.kapillamba4.theopensourcemovieapp.R;
-import com.example.kapillamba4.theopensourcemovieapp.Services.MovieService;
 import com.example.kapillamba4.theopensourcemovieapp.Services.TvService;
 import com.example.kapillamba4.theopensourcemovieapp.Utils.CONSTANTS;
 
@@ -55,7 +53,7 @@ public class TvFragment extends Fragment {
         SnapHelper mSnapHelper = new LinearSnapHelper();
         mSnapHelper.attachToRecyclerView(mRecyclerView);
         TvService tvService = mBuilder.create(TvService.class);
-        Call<WrapperTvShow> popularTvCall = tvService.getPopularTVShows(CONSTANTS.API_KEY, 1);
+        Call<WrapperTvShow> popularTvCall = tvService.getPopularTVShows(CONSTANTS.MOVIE_DB_API_KEY, 1);
         popularTvCall.enqueue(new Callback<WrapperTvShow>() {
             @Override
             public void onResponse(Call<WrapperTvShow> call, Response<WrapperTvShow> response) {
@@ -84,7 +82,7 @@ public class TvFragment extends Fragment {
                                 loading = true;
                                 Log.v("Scroll: ", "Last Item reached !");
                                 TvService tvService  = mBuilder.create(TvService.class);
-                                Call<WrapperTvShow> popularTvCall = tvService.getPopularTVShows(CONSTANTS.API_KEY, ++mPopularTvShowsPage);
+                                Call<WrapperTvShow> popularTvCall = tvService.getPopularTVShows(CONSTANTS.MOVIE_DB_API_KEY, ++mPopularTvShowsPage);
                                 popularTvCall.enqueue(new Callback<WrapperTvShow>() {
                                     @Override
                                     public void onResponse(Call<WrapperTvShow> call, Response<WrapperTvShow> response) {
@@ -119,7 +117,7 @@ public class TvFragment extends Fragment {
         SnapHelper mSnapHelper = new LinearSnapHelper();
         mSnapHelper.attachToRecyclerView(mRecyclerView);
         TvService tvService = mBuilder.create(TvService.class);
-        Call<WrapperTvShow> topRatedTvCall = tvService.getTopRatedTvShows(CONSTANTS.API_KEY, 1);
+        Call<WrapperTvShow> topRatedTvCall = tvService.getTopRatedTvShows(CONSTANTS.MOVIE_DB_API_KEY, 1);
         topRatedTvCall.enqueue(new Callback<WrapperTvShow>() {
             @Override
             public void onResponse(Call<WrapperTvShow> call, Response<WrapperTvShow> response) {
@@ -148,7 +146,7 @@ public class TvFragment extends Fragment {
                                 loading = true;
                                 Log.v("Scroll: ", "Last Item reached !");
                                 TvService tvService  = mBuilder.create(TvService.class);
-                                Call<WrapperTvShow> topRatedTvCall = tvService.getTopRatedTvShows(CONSTANTS.API_KEY, ++mTopRatedTvShowsPage);
+                                Call<WrapperTvShow> topRatedTvCall = tvService.getTopRatedTvShows(CONSTANTS.MOVIE_DB_API_KEY, ++mTopRatedTvShowsPage);
                                 topRatedTvCall.enqueue(new Callback<WrapperTvShow>() {
                                     @Override
                                     public void onResponse(Call<WrapperTvShow> call, Response<WrapperTvShow> response) {
@@ -183,7 +181,7 @@ public class TvFragment extends Fragment {
         SnapHelper mSnapHelper = new LinearSnapHelper();
         mSnapHelper.attachToRecyclerView(mRecyclerView);
         TvService tvService = mBuilder.create(TvService.class);
-        Call<WrapperTvShow> airingTvCall = tvService.getAiringTvShows(CONSTANTS.API_KEY, 1);
+        Call<WrapperTvShow> airingTvCall = tvService.getAiringTvShows(CONSTANTS.MOVIE_DB_API_KEY, 1);
         airingTvCall.enqueue(new Callback<WrapperTvShow>() {
             @Override
             public void onResponse(Call<WrapperTvShow> call, Response<WrapperTvShow> response) {
@@ -212,7 +210,7 @@ public class TvFragment extends Fragment {
                                 loading = true;
                                 Log.v("Scroll: ", "Last Item reached !");
                                 TvService tvService  = mBuilder.create(TvService.class);
-                                Call<WrapperTvShow> airingTvCall = tvService.getAiringTvShows(CONSTANTS.API_KEY, ++mAiringTvShowsPage);
+                                Call<WrapperTvShow> airingTvCall = tvService.getAiringTvShows(CONSTANTS.MOVIE_DB_API_KEY, ++mAiringTvShowsPage);
                                 airingTvCall.enqueue(new Callback<WrapperTvShow>() {
                                     @Override
                                     public void onResponse(Call<WrapperTvShow> call, Response<WrapperTvShow> response) {

@@ -1,7 +1,6 @@
 package com.example.kapillamba4.theopensourcemovieapp.Adapters;
 
 import android.content.Context;
-import android.support.annotation.LayoutRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,25 +20,23 @@ import java.util.ArrayList;
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHolder> {
     private ArrayList<String> mImages;
     private Context mContext;
-    private int mLayoutId;
-    private String mBaseImageUrl;
 
-    public ImageAdapter(Context context, ArrayList<String> urls, @LayoutRes int id, String baseImageUrl) {
+    public ImageAdapter(Context context, ArrayList<String> urls) {
         mImages = urls;
         mContext = context;
-        mLayoutId = id;
-        mBaseImageUrl = baseImageUrl;
     }
 
     @Override
     public ImageAdapter.ImageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View inflatedView = LayoutInflater.from(mContext).inflate(mLayoutId, parent, false);
+        View inflatedView = LayoutInflater.from(mContext).inflate(R.layout.image, parent, false);
         return new ImageViewHolder(inflatedView);
     }
 
     @Override
     public void onBindViewHolder(ImageAdapter.ImageViewHolder holder, int position) {
-        Picasso.with(mContext).load(mBaseImageUrl+mImages.get(position)).into(holder.mImageView);
+        holder.mProgressBar.setVisibility(View.VISIBLE);
+        Picasso.with(mContext).load(CONSTANTS.BASE_POSTER_URL_LARGE + mImages.get(position)).resize(0, CONSTANTS.BASE_POSTER_HEIGHT_SMALL).into(holder.mImageView);
+        holder.mProgressBar.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -50,10 +47,13 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
     static class ImageViewHolder extends RecyclerView.ViewHolder {
         ImageView mImageView;
         View mItemView;
+        View mProgressBar;
+
         public ImageViewHolder(View itemView) {
             super(itemView);
             mItemView = itemView;
             mImageView = itemView.findViewById(R.id.image);
+            mProgressBar = itemView.findViewById(R.id.progress_bar);
         }
     }
 }

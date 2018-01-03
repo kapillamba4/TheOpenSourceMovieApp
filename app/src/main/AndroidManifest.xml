@@ -22,16 +22,20 @@
         <activity
             android:name=".Activities.DetailActivity"
             android:label="@string/title_activity_movie_detail"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity android:name=".Activities.SearchActivity" android:launchMode="singleTop">
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".Activities.SearchActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
+
             <meta-data
                 android:name="android.app.default_searchable"
-                android:value="com.example.kapillamba4.theopensourcemovieapp.SearchActivity"/>
+                android:value="com.example.kapillamba4.theopensourcemovieapp.SearchActivity" />
         </activity>
+        <activity android:name=".Activities.VerticalMovieListActivity"></activity>
+        <activity android:name=".Activities.VerticalTvListActivity" />
     </application>
 
 </manifest>

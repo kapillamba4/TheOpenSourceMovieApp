@@ -20,13 +20,15 @@ import android.widget.Toast;
 
 import com.example.kapillamba4.theopensourcemovieapp.Adapters.HorizontalMovieCustomAdapter;
 import com.example.kapillamba4.theopensourcemovieapp.Adapters.HorizontalTvCustomAdapter;
+import com.example.kapillamba4.theopensourcemovieapp.Adapters.SearchDataAdapter;
+import com.example.kapillamba4.theopensourcemovieapp.Fragments.FavouriteFragment;
 import com.example.kapillamba4.theopensourcemovieapp.Fragments.MovieFragment;
 import com.example.kapillamba4.theopensourcemovieapp.Fragments.TvFragment;
 import com.example.kapillamba4.theopensourcemovieapp.Network.NetworkChangeReceiver;
 import com.example.kapillamba4.theopensourcemovieapp.R;
+import com.example.kapillamba4.theopensourcemovieapp.Utils.CONSTANTS;
 
-
-public class MainActivity extends AppCompatActivity implements HorizontalMovieCustomAdapter.onClickCustomListener, HorizontalTvCustomAdapter.onClickCustomListener, SearchView.OnQueryTextListener {
+public class MainActivity extends AppCompatActivity implements HorizontalMovieCustomAdapter.onClickCustomListener, HorizontalTvCustomAdapter.onClickCustomListener, SearchView.OnQueryTextListener, View.OnClickListener {
 
     private static TextView mCheckConnection;
     private NetworkChangeReceiver mNetworkChangeReceiver;
@@ -47,7 +49,8 @@ public class MainActivity extends AppCompatActivity implements HorizontalMovieCu
                     getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, tvFragment).commit();
                     break;
                 case R.id.menu_personal_favourites:
-                    // TODO
+                    FavouriteFragment favouriteFragment = new FavouriteFragment();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, favouriteFragment).commit();
                     break;
             }
             return false;
@@ -148,12 +151,49 @@ public class MainActivity extends AppCompatActivity implements HorizontalMovieCu
                 intent.putExtra("id", id);
                 intent.putExtra("type", type);
                 startActivity(intent);
-                Toast.makeText(this, "TV " + id, Toast.LENGTH_SHORT);
                 break;
             case "movie":
                 intent = new Intent(this, DetailActivity.class);
                 intent.putExtra("id", id);
                 intent.putExtra("type", type);
+                startActivity(intent);
+                break;
+        }
+    }
+
+
+    @Override
+    public void onClick(View view) {
+        Intent intent;
+        switch (view.getId()) {
+            case R.id.movie_popular_more:
+                intent = new Intent(this, VerticalMovieListActivity.class);
+                intent.putExtra("header", CONSTANTS.POPULAR_TAG);
+                startActivity(intent);
+                break;
+            case R.id.movie_top_rated_more:
+                intent = new Intent(this, VerticalMovieListActivity.class);
+                intent.putExtra("header", CONSTANTS.TOP_RATED_TAG);
+                startActivity(intent);
+                break;
+            case R.id.movie_upcoming_more:
+                intent = new Intent(this, VerticalMovieListActivity.class);
+                intent.putExtra("header", CONSTANTS.UPCOMING_TAG);
+                startActivity(intent);
+                break;
+            case R.id.tv_popular_more:
+                intent = new Intent(this, VerticalTvListActivity.class);
+                intent.putExtra("header", CONSTANTS.POPULAR_TAG);
+                startActivity(intent);
+                break;
+            case R.id.tv_top_rated_more:
+                intent = new Intent(this, VerticalTvListActivity.class);
+                intent.putExtra("header", CONSTANTS.TOP_RATED_TAG);
+                startActivity(intent);
+                break;
+            case R.id.tv_upcoming_more:
+                intent = new Intent(this, VerticalTvListActivity.class);
+                intent.putExtra("header", CONSTANTS.UPCOMING_TAG);
                 startActivity(intent);
                 break;
         }
