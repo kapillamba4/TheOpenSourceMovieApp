@@ -13,6 +13,12 @@
 - Quickly search for New, Top Rated & Popular movies and tv shows
 - Find detailed information about any movie
 
+## Libraries
+- Room persistence library
+- Retrofit REST API Client
+- Google's design, appcompat, cardview, recyclerview and other support libraries
+- Picasso for loading images
+
 ## License
 
 >MIT License
