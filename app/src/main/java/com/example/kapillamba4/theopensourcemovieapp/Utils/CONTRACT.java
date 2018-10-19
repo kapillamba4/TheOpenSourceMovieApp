@@ -1,4 +1,4 @@
-package com.example.kapillamba4.theopensourcemovieapp.Utils;
+package com.kapillamba4.thecompletemovieguide.Utils;
 
 /**
  * Created by kapil on 3/1/18.

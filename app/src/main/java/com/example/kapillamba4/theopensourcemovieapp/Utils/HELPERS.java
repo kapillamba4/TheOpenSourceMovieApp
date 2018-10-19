@@ -1,9 +1,9 @@
-package com.example.kapillamba4.theopensourcemovieapp.Utils;
+package com.kapillamba4.thecompletemovieguide.Utils;
 
-import com.example.kapillamba4.theopensourcemovieapp.Database.FavouriteEntity;
-import com.example.kapillamba4.theopensourcemovieapp.Entities.DetailMovie;
-import com.example.kapillamba4.theopensourcemovieapp.Entities.DetailTv;
-import com.example.kapillamba4.theopensourcemovieapp.Entities.Genre;
+import com.kapillamba4.thecompletemovieguide.Database.FavouriteEntity;
+import com.kapillamba4.thecompletemovieguide.Entities.DetailMovie;
+import com.kapillamba4.thecompletemovieguide.Entities.DetailTv;
+import com.kapillamba4.thecompletemovieguide.Entities.Genre;
 
 import java.util.ArrayList;
 

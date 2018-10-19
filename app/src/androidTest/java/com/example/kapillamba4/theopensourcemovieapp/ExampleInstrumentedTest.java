@@ -1,4 +1,4 @@
-package com.example.kapillamba4.theopensourcemovieapp;
+package com.kapillamba4.thecompletemovieguide;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.kapillamba4.theopensourcemovieapp", appContext.getPackageName());
+        assertEquals("com.kapillamba4.thecompletemovieguide", appContext.getPackageName());
     }
 }

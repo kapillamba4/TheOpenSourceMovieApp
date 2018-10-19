@@ -1,4 +1,4 @@
-package com.example.kapillamba4.theopensourcemovieapp;
+package com.kapillamba4.thecompletemovieguide;
 
 import org.junit.Test;
 

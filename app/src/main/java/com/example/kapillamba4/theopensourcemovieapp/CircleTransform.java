@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.kapillamba4.theopensourcemovieapp;
+package com.kapillamba4.thecompletemovieguide;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;

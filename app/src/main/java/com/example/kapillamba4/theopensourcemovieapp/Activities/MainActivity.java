@@ -1,4 +1,4 @@
-package com.example.kapillamba4.theopensourcemovieapp.Activities;
+package com.kapillamba4.thecompletemovieguide.Activities;
 
 import android.app.SearchManager;
 import android.content.Intent;
@@ -18,15 +18,15 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.kapillamba4.theopensourcemovieapp.Adapters.HorizontalMovieCustomAdapter;
-import com.example.kapillamba4.theopensourcemovieapp.Adapters.HorizontalTvCustomAdapter;
-import com.example.kapillamba4.theopensourcemovieapp.Adapters.SearchDataAdapter;
-import com.example.kapillamba4.theopensourcemovieapp.Fragments.FavouriteFragment;
-import com.example.kapillamba4.theopensourcemovieapp.Fragments.MovieFragment;
-import com.example.kapillamba4.theopensourcemovieapp.Fragments.TvFragment;
-import com.example.kapillamba4.theopensourcemovieapp.Network.NetworkChangeReceiver;
-import com.example.kapillamba4.theopensourcemovieapp.R;
-import com.example.kapillamba4.theopensourcemovieapp.Utils.CONSTANTS;
+import com.kapillamba4.thecompletemovieguide.Adapters.HorizontalMovieCustomAdapter;
+import com.kapillamba4.thecompletemovieguide.Adapters.HorizontalTvCustomAdapter;
+import com.kapillamba4.thecompletemovieguide.Adapters.SearchDataAdapter;
+import com.kapillamba4.thecompletemovieguide.Fragments.FavouriteFragment;
+import com.kapillamba4.thecompletemovieguide.Fragments.MovieFragment;
+import com.kapillamba4.thecompletemovieguide.Fragments.TvFragment;
+import com.kapillamba4.thecompletemovieguide.Network.NetworkChangeReceiver;
+import com.kapillamba4.thecompletemovieguide.R;
+import com.kapillamba4.thecompletemovieguide.Utils.CONSTANTS;
 
 public class MainActivity extends AppCompatActivity implements HorizontalMovieCustomAdapter.onClickCustomListener, HorizontalTvCustomAdapter.onClickCustomListener, SearchView.OnQueryTextListener, View.OnClickListener {
 

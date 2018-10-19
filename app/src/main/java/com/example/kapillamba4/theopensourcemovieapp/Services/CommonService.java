@@ -1,10 +1,10 @@
-package com.example.kapillamba4.theopensourcemovieapp.Services;
+package com.kapillamba4.thecompletemovieguide.Services;
 
-import com.example.kapillamba4.theopensourcemovieapp.Entities.MultiSearch;
-import com.example.kapillamba4.theopensourcemovieapp.Entities.ResourceImage;
-import com.example.kapillamba4.theopensourcemovieapp.Entities.WrapperCast;
-import com.example.kapillamba4.theopensourcemovieapp.Entities.WrapperImage;
-import com.example.kapillamba4.theopensourcemovieapp.Entities.WrapperVideo;
+import com.kapillamba4.thecompletemovieguide.Entities.MultiSearch;
+import com.kapillamba4.thecompletemovieguide.Entities.ResourceImage;
+import com.kapillamba4.thecompletemovieguide.Entities.WrapperCast;
+import com.kapillamba4.thecompletemovieguide.Entities.WrapperImage;
+import com.kapillamba4.thecompletemovieguide.Entities.WrapperVideo;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

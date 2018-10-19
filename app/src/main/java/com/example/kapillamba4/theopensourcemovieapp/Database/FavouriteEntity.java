@@ -1,11 +1,11 @@
-package com.example.kapillamba4.theopensourcemovieapp.Database;
+package com.kapillamba4.thecompletemovieguide.Database;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
-import com.example.kapillamba4.theopensourcemovieapp.Utils.CONTRACT;
+import com.kapillamba4.thecompletemovieguide.Utils.CONTRACT;
 
 /**
  * Created by kapil on 3/1/18.

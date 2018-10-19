@@ -1,4 +1,4 @@
-package com.example.kapillamba4.theopensourcemovieapp.Activities;
+package com.kapillamba4.thecompletemovieguide.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,16 +6,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.example.kapillamba4.theopensourcemovieapp.Adapters.VerticalMovieCustomAdapter;
-import com.example.kapillamba4.theopensourcemovieapp.Adapters.VerticalTvCustomAdapter;
-import com.example.kapillamba4.theopensourcemovieapp.Entities.Movie;
-import com.example.kapillamba4.theopensourcemovieapp.Entities.TvShow;
-import com.example.kapillamba4.theopensourcemovieapp.Entities.WrapperMovie;
-import com.example.kapillamba4.theopensourcemovieapp.Entities.WrapperTvShow;
-import com.example.kapillamba4.theopensourcemovieapp.R;
-import com.example.kapillamba4.theopensourcemovieapp.Services.MovieService;
-import com.example.kapillamba4.theopensourcemovieapp.Services.TvService;
-import com.example.kapillamba4.theopensourcemovieapp.Utils.CONSTANTS;
+import com.kapillamba4.thecompletemovieguide.Adapters.VerticalMovieCustomAdapter;
+import com.kapillamba4.thecompletemovieguide.Adapters.VerticalTvCustomAdapter;
+import com.kapillamba4.thecompletemovieguide.Entities.Movie;
+import com.kapillamba4.thecompletemovieguide.Entities.TvShow;
+import com.kapillamba4.thecompletemovieguide.Entities.WrapperMovie;
+import com.kapillamba4.thecompletemovieguide.Entities.WrapperTvShow;
+import com.kapillamba4.thecompletemovieguide.R;
+import com.kapillamba4.thecompletemovieguide.Services.MovieService;
+import com.kapillamba4.thecompletemovieguide.Services.TvService;
+import com.kapillamba4.thecompletemovieguide.Utils.CONSTANTS;
 
 import java.util.ArrayList;
 

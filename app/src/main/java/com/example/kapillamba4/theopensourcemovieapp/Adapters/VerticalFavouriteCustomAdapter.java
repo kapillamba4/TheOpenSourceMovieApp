@@ -1,4 +1,4 @@
-package com.example.kapillamba4.theopensourcemovieapp.Adapters;
+package com.kapillamba4.thecompletemovieguide.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,10 +9,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.kapillamba4.theopensourcemovieapp.Database.FavouriteEntity;
-import com.example.kapillamba4.theopensourcemovieapp.Entities.TvShow;
-import com.example.kapillamba4.theopensourcemovieapp.R;
-import com.example.kapillamba4.theopensourcemovieapp.Utils.CONSTANTS;
+import com.kapillamba4.thecompletemovieguide.Database.FavouriteEntity;
+import com.kapillamba4.thecompletemovieguide.Entities.TvShow;
+import com.kapillamba4.thecompletemovieguide.R;
+import com.kapillamba4.thecompletemovieguide.Utils.CONSTANTS;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.example.kapillamba4.theopensourcemovieapp.Fragments;
+package com.kapillamba4.thecompletemovieguide.Fragments;
 
 
 import android.os.Bundle;
@@ -14,12 +14,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import com.example.kapillamba4.theopensourcemovieapp.Adapters.HorizontalTvCustomAdapter;
-import com.example.kapillamba4.theopensourcemovieapp.Entities.TvShow;
-import com.example.kapillamba4.theopensourcemovieapp.Entities.WrapperTvShow;
-import com.example.kapillamba4.theopensourcemovieapp.R;
-import com.example.kapillamba4.theopensourcemovieapp.Services.TvService;
-import com.example.kapillamba4.theopensourcemovieapp.Utils.CONSTANTS;
+import com.kapillamba4.thecompletemovieguide.Adapters.HorizontalTvCustomAdapter;
+import com.kapillamba4.thecompletemovieguide.Entities.TvShow;
+import com.kapillamba4.thecompletemovieguide.Entities.WrapperTvShow;
+import com.kapillamba4.thecompletemovieguide.R;
+import com.kapillamba4.thecompletemovieguide.Services.TvService;
+import com.kapillamba4.thecompletemovieguide.Utils.CONSTANTS;
 
 import java.util.ArrayList;
 

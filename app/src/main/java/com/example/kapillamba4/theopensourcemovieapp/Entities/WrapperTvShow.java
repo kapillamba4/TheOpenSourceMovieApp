@@ -1,4 +1,4 @@
-package com.example.kapillamba4.theopensourcemovieapp.Entities;
+package com.kapillamba4.thecompletemovieguide.Entities;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

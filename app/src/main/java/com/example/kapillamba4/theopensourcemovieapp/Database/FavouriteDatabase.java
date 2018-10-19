@@ -1,4 +1,4 @@
-package com.example.kapillamba4.theopensourcemovieapp.Database;
+package com.kapillamba4.thecompletemovieguide.Database;
 
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.RoomDatabase;

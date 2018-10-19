@@ -1,4 +1,4 @@
-package com.example.kapillamba4.theopensourcemovieapp.Activities;
+package com.kapillamba4.thecompletemovieguide.Activities;
 
 import android.app.SearchManager;
 import android.content.Intent;
@@ -10,12 +10,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.SearchView;
 
-import com.example.kapillamba4.theopensourcemovieapp.Adapters.SearchDataAdapter;
-import com.example.kapillamba4.theopensourcemovieapp.Entities.MultiSearch;
-import com.example.kapillamba4.theopensourcemovieapp.Entities.SearchItem;
-import com.example.kapillamba4.theopensourcemovieapp.R;
-import com.example.kapillamba4.theopensourcemovieapp.Services.CommonService;
-import com.example.kapillamba4.theopensourcemovieapp.Utils.CONSTANTS;
+import com.kapillamba4.thecompletemovieguide.Adapters.SearchDataAdapter;
+import com.kapillamba4.thecompletemovieguide.Entities.MultiSearch;
+import com.kapillamba4.thecompletemovieguide.Entities.SearchItem;
+import com.kapillamba4.thecompletemovieguide.R;
+import com.kapillamba4.thecompletemovieguide.Services.CommonService;
+import com.kapillamba4.thecompletemovieguide.Utils.CONSTANTS;
 
 import java.util.ArrayList;
 

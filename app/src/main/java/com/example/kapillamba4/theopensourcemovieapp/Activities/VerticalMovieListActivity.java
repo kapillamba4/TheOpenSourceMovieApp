@@ -1,4 +1,4 @@
-package com.example.kapillamba4.theopensourcemovieapp.Activities;
+package com.kapillamba4.thecompletemovieguide.Activities;
 
 import android.app.SearchManager;
 import android.content.Intent;
@@ -7,15 +7,15 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.example.kapillamba4.theopensourcemovieapp.Adapters.SearchDataAdapter;
-import com.example.kapillamba4.theopensourcemovieapp.Adapters.VerticalMovieCustomAdapter;
-import com.example.kapillamba4.theopensourcemovieapp.Entities.Movie;
-import com.example.kapillamba4.theopensourcemovieapp.Entities.MultiSearch;
-import com.example.kapillamba4.theopensourcemovieapp.Entities.WrapperMovie;
-import com.example.kapillamba4.theopensourcemovieapp.R;
-import com.example.kapillamba4.theopensourcemovieapp.Services.CommonService;
-import com.example.kapillamba4.theopensourcemovieapp.Services.MovieService;
-import com.example.kapillamba4.theopensourcemovieapp.Utils.CONSTANTS;
+import com.kapillamba4.thecompletemovieguide.Adapters.SearchDataAdapter;
+import com.kapillamba4.thecompletemovieguide.Adapters.VerticalMovieCustomAdapter;
+import com.kapillamba4.thecompletemovieguide.Entities.Movie;
+import com.kapillamba4.thecompletemovieguide.Entities.MultiSearch;
+import com.kapillamba4.thecompletemovieguide.Entities.WrapperMovie;
+import com.kapillamba4.thecompletemovieguide.R;
+import com.kapillamba4.thecompletemovieguide.Services.CommonService;
+import com.kapillamba4.thecompletemovieguide.Services.MovieService;
+import com.kapillamba4.thecompletemovieguide.Utils.CONSTANTS;
 
 import java.util.ArrayList;
 

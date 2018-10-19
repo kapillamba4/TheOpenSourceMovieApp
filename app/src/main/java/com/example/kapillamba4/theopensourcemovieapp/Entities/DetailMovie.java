@@ -1,4 +1,4 @@
-package com.example.kapillamba4.theopensourcemovieapp.Entities;
+package com.kapillamba4.thecompletemovieguide.Entities;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;

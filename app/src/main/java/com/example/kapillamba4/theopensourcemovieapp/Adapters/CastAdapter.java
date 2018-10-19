@@ -1,4 +1,4 @@
-package com.example.kapillamba4.theopensourcemovieapp.Adapters;
+package com.kapillamba4.thecompletemovieguide.Adapters;
 
 import android.content.Context;
 import android.net.Uri;
@@ -9,9 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.kapillamba4.theopensourcemovieapp.Entities.Cast;
-import com.example.kapillamba4.theopensourcemovieapp.R;
-import com.example.kapillamba4.theopensourcemovieapp.Utils.CONSTANTS;
+import com.kapillamba4.thecompletemovieguide.Entities.Cast;
+import com.kapillamba4.thecompletemovieguide.R;
+import com.kapillamba4.thecompletemovieguide.Utils.CONSTANTS;
 
 import com.squareup.picasso.Picasso;
 

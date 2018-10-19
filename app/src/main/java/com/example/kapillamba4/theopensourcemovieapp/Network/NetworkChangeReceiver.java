@@ -1,4 +1,4 @@
-package com.example.kapillamba4.theopensourcemovieapp.Network;
+package com.kapillamba4.thecompletemovieguide.Network;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import static com.example.kapillamba4.theopensourcemovieapp.Activities.MainActivity.dialog;
+import static com.kapillamba4.thecompletemovieguide.Activities.MainActivity.dialog;
 
 /**
  * Created by kapil on 21/10/17.
